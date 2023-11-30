@@ -1,18 +1,14 @@
-@mixin flex-col
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
-    
+@use 'variables' as var
+
 .home
     flex-wrap: wrap
     padding: 4rem
-    @include flex-col
+    @include var.flex-col
     text-align: center
     max-width: 30rem
     h1
         max-width: 25rem
         margin: 6rem auto 5rem
     div
-        @include flex-col
+        @include var.flex-col
         gap: 1.5rem

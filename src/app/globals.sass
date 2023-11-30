@@ -1,23 +1,5 @@
+@use 'variables' as var
 @import url("https://use.typekit.net/nvu4ntw.css")
-
-$futura: "futura-pt", Helvetica, Arial, sans-serif
-$futura-bold: "futura-pt-bold", Helvetica, Arial, sans-serif
-$omnes: "omnes-pro", Helvetica, Arial, sans-serif
-$gloria: gloria-hallelujah, Helvetica, Arial, sans-serif
-$omnes-regular: 500
-$omnes-bold: 800
-$heavy: 700
-$gradient: linear-gradient(90deg, #F03 0%, #F60 100%)
-
-@mixin flex-col
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
-
-@mixin full
-    height: 100%
-    width: 100%
 
 *
     box-sizing: border-box
@@ -25,28 +7,35 @@ $gradient: linear-gradient(90deg, #F03 0%, #F60 100%)
     padding: 0
 html
     font-size: 62.5%
-    @include full
+    min-height: 100vh
 body
-    font-family: $omnes
-    font-weight: $omnes-regular
+    font-family: var.$omnes
+    font-weight: var.$omnes-regular
     font-size: 1.6rem
-    @include full
+    @include var.full
 main
-    @include flex-col
-    @include full
+    @include var.flex-col
+    @include var.full
 img
-    width: 100%
+    width: auto
 h1
-    font-family: $futura-bold
+    font-family: var.$futura-bold
     font-size: 4rem
     line-height: 5.2rem
     letter-spacing: -0.1rem
+    text-align: center
+    margin:
+        right: auto
+        left: auto
+
 button
-    font-family: $gloria
+    background: none
+    border: none
 
 .btn
+    font-family: var.$gloria
     align-items: center
-    background: $gradient
+    background: var.$gradient
     border: none
     border-radius: 1rem
     color: white
@@ -60,4 +49,25 @@ button
     letter-spacing: 0.125rem
     padding: 1.5rem 2rem
     margin: 0 auto
+    text-decoration: none
+form
+    @include var.flex-col
+    gap: 2.5rem
+    div
+        @include var.flex-col
+        gap: 1.4rem
+        align-items: flex-start
+        width: 100%
+    
+label
+    text-transform: uppercase
+    color: var.$red
+    font-family: var.$futura
+input
+    border: 0.1rem solid var.$red
+    padding: 1rem 1.5rem
+    border-radius: 1.5rem
+    width: 100%
+    font-size: 1.6rem
+
 
