@@ -1,0 +1,63 @@
+@import url("https://use.typekit.net/nvu4ntw.css")
+
+$futura: "futura-pt", Helvetica, Arial, sans-serif
+$futura-bold: "futura-pt-bold", Helvetica, Arial, sans-serif
+$omnes: "omnes-pro", Helvetica, Arial, sans-serif
+$gloria: gloria-hallelujah, Helvetica, Arial, sans-serif
+$omnes-regular: 500
+$omnes-bold: 800
+$heavy: 700
+$gradient: linear-gradient(90deg, #F03 0%, #F60 100%)
+
+@mixin flex-col
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+@mixin full
+    height: 100%
+    width: 100%
+
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+html
+    font-size: 62.5%
+    @include full
+body
+    font-family: $omnes
+    font-weight: $omnes-regular
+    font-size: 1.6rem
+    @include full
+main
+    @include flex-col
+    @include full
+img
+    width: 100%
+h1
+    font-family: $futura-bold
+    font-size: 4rem
+    line-height: 5.2rem
+    letter-spacing: -0.1rem
+button
+    font-family: $gloria
+
+.btn
+    align-items: center
+    background: $gradient
+    border: none
+    border-radius: 1rem
+    color: white
+    display: flex
+    font-size: 1.6rem
+    gap: 1rem
+    justify-content: center
+    min-width: 20rem
+    max-width: min-content
+    line-height: 1.6rem
+    letter-spacing: 0.125rem
+    padding: 1.5rem 2rem
+    margin: 0 auto
+
