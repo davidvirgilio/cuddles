@@ -1,0 +1,50 @@
+@use '../app/_variables' as var
+    
+.overlay
+    @include var.full
+    @include var.flex
+    position: fixed
+    top: 0
+    left: 0
+    background: #2229
+    .wrapper
+        @include var.flex
+        background: white
+        border-radius: 2rem
+        margin: 0 auto
+        padding: 5rem 4rem
+        gap: 6rem
+        max-width: 40rem
+        position: relative
+        width: 100%
+        &>div:first-of-type
+            @include var.flex(row)
+            gap: 1rem
+            width: 100%
+            font-family: var.$futura-bold
+            font-weight: 600
+            font-size: 2.4rem
+            color: var.$gradient
+            h2
+                display: inline-block
+                background: var.$gradient
+                background-clip: text
+                color: transparent
+            span
+                @include var.circle
+                @include var.flex
+                border: 0.7rem solid var.$orange
+                width: 5rem
+                font-size: 3rem
+
+        .captionWrapper
+            @include var.flex(column)
+            gap: 2rem
+            img
+                max-width: 100%
+                height: auto
+        .close
+            position: absolute
+            top: 2rem
+            right: 2rem
+

@@ -1,6 +1,6 @@
 import React from "react";
 import style from '../auth.module.sass'
-import { Icon } from "@/slices/logos";
+import { Icon } from "@/slices/Logos";
 
 export default function Page(){
     return(
@@ -10,11 +10,11 @@ export default function Page(){
             <form>
                 <div>
                     <label htmlFor="username">username or email:</label>
-                    <input type="text" name="username" placeholder="James Bones" max={20}/>
+                    <input type="text" id="username" placeholder="James Bones" max={20} autoComplete="true"/>
                 </div>
                 <div>
                     <label htmlFor="password">password:</label>
-                    <input type="password" name="password" placeholder="•••••••••"/>
+                    <input type="password" id="password" placeholder="•••••••••" autoComplete="true"/>
                 </div>
                 <button className="btn" type="submit">Continue</button>
             </form>

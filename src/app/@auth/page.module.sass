@@ -1,14 +1,14 @@
-@use 'variables' as var
+@use '../_variables' as var
 
 .home
     flex-wrap: wrap
     padding: 4rem
-    @include var.flex-col
+    @include var.flex
     text-align: center
     max-width: 30rem
     h1
         max-width: 25rem
         margin: 6rem auto 5rem
     div
-        @include var.flex-col
+        @include var.flex
         gap: 1.5rem

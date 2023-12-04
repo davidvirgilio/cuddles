@@ -1,0 +1,101 @@
+[
+    {
+        "post_id": "01",
+        "img": "sample-1",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "001",
+        "likes": [
+            {"user_id": "002"},
+            {"user_id": "003"}
+        ],
+        "comments": [
+            {"user_id": "002", "comment": "You rock!"},
+            {"user_id": "003", "comment": "I love the style!"}
+        ]
+    },
+    {
+        "post_id": "02",
+        "img": "sample-2",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "001",
+        "likes": [
+            {"user_id": "002"},
+            {"user_id": "003"}
+        ],
+        "comments": [
+            {"user_id": "002", "comment": "You rock!"},
+            {"user_id": "003", "comment": "I love the style!"}
+        ]
+    },
+    {
+        "post_id": "03",
+        "img": "sample-3",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "001",
+        "likes": [
+            {"user_id": "002"},
+            {"user_id": "003"}
+        ],
+        "comments": [
+            {"user_id": "002", "comment": "You rock!"},
+            {"user_id": "003", "comment": "I love the style!"}
+        ]
+    },
+    {
+        "post_id": "04",
+        "img": "sample-4",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "002",
+        "likes": [
+            {"user_id": "001"},
+            {"user_id": "003"}
+        ],
+        "comments": [
+            {"user_id": "001", "comment": "You rock!"},
+            {"user_id": "003", "comment": "I love the style!"}
+        ]
+    },
+    {
+        "post_id": "05",
+        "img": "sample-5",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "002",
+        "likes": [
+            {"user_id": "001"},
+            {"user_id": "003"}
+        ],
+        "comments": [
+            {"user_id": "001", "comment": "You rock!"},
+            {"user_id": "003", "comment": "I love the style!"}
+        ]
+    },
+    {
+        "post_id": "06",
+        "img": "sample-6",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "003",
+        "likes": [
+            {"user_id": "002"},
+            {"user_id": "001"}
+        ],
+        "comments": [
+            {"user_id": "002", "comment": "You rock!"},
+            {"user_id": "001", "comment": "I love the style!"}
+        ]
+    },
+    {
+        "post_id": "07",
+        "img": "sample-7",
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum volutpat nulla ut bibendum. Sed tempor vehicula tristique.",
+        "user_id": "003",
+        "likes": [
+            {"user_id": "002"},
+            {"user_id": "001"}
+        ],
+        "comments": [
+            {"user_id": "002", "comment": "You rock!"},
+            {"user_id": "001", "comment": "I love the style!"}
+        ]
+    }
+]
+

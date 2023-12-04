@@ -7,13 +7,20 @@ $omnes-bold: 800
 $heavy: 700
 $gradient: linear-gradient(90deg, #F03 0%, #F60 100%)
 $red: #ED002F
+$orange: #F60
 
-@mixin flex-col
+@mixin flex($direction: column)
     display: flex
-    flex-direction: column
+    flex-direction: $direction
     justify-content: center
     align-items: center
 
 @mixin full
     height: 100%
     width: 100%
+
+@mixin circle
+    border-radius: 50%
+    height: auto
+    aspect-ratio: 1/1
+    

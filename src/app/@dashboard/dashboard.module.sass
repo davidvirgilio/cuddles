@@ -1,10 +1,16 @@
 @use '../variables' as var
+
+.wrapper
+    @include var.flex
+    min-height: 100vh
 .header
-    @include var.flex-col
+    @include var.flex
     padding: 1.5rem 4rem
 .navBar
-    position: absolute
+    position: sticky
     bottom: 0
+    flex-shrink: 0
+    background: white
     width: 100%
     ul
         display: flex

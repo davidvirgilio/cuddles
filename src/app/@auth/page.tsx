@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import styles from './page.module.sass'
 import Link from 'next/link'
-import { Icon } from '@/slices/logos'
+import { Icon } from '@/slices/Logos'
 
-export default function Home() {
+export default function Auth() {
   return (
     <main>
       <div className={styles.home}>

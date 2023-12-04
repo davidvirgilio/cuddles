@@ -14,7 +14,7 @@ body
     font-size: 1.6rem
     @include var.full
 main
-    @include var.flex-col
+    @include var.flex
     @include var.full
 img
     width: auto
@@ -31,6 +31,7 @@ h1
 button
     background: none
     border: none
+    cursor: pointer
 
 .btn
     font-family: var.$gloria
@@ -51,10 +52,10 @@ button
     margin: 0 auto
     text-decoration: none
 form
-    @include var.flex-col
+    @include var.flex
     gap: 2.5rem
     div
-        @include var.flex-col
+        @include var.flex
         gap: 1.4rem
         align-items: flex-start
         width: 100%
@@ -70,4 +71,18 @@ input
     width: 100%
     font-size: 1.6rem
 
+textarea
+    @extend input
+    font-family: var.$omnes
 
+.logo
+    margin: 0 auto
+    img
+        height: auto
+        width: 100%
+
+.hidden
+    display: none !important
+
+a
+    text-decoration: none

@@ -1,0 +1,42 @@
+@use '../../variables' as var
+
+.userHeader
+    display: flex
+    align-items: flex-start
+    justify-content: left
+    padding: 1rem 3rem 2rem
+    gap: 2rem
+    background-color: white
+    border-bottom: 0.5rem solid var.$orange
+    img
+        @include var.circle
+        max-width: 9rem
+    &>div
+        @include var.flex
+        gap: 1.5rem
+
+        .heading
+            display: flex
+            align-items: center
+            gap: 1rem
+            justify-content: space-between
+            h1
+                font-size: 2.4rem
+                font-weight: 600
+                line-height: normal
+            button
+                font-size: 1.6rem
+                text-decoration: underline
+
+        .followButtons
+            display: flex
+            justify-content: space-between
+            gap: 1rem
+
+            button
+                min-width: 9rem
+                padding: 1rem
+                font-size: 1.3rem
+
+
+

@@ -6,14 +6,19 @@ export const metadata: Metadata = {
   description: 'Share your heartwarming with us',
 }
 
+const isLoggedIn = true;
+
 export default function RootLayout({
-  children,
+  auth,
+  dashboard
+
 }: {
-  children: React.ReactNode
+  auth: React.ReactNode,
+  dashboard: React.ReactNode,
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>{ isLoggedIn ? dashboard : auth}</body>
     </html>
   )
 }

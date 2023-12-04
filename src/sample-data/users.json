@@ -1,0 +1,51 @@
+[
+    {
+        "user_id": "001",
+        "username": "cuddles",
+        "name": "James Bones",
+        "password": "cuddles",
+        "email": "jamesbones@cuddles.ca",
+        "profile_pic": "avatar1",
+        "followers": [
+            {"user_id": "002"},
+            {"user_id": "003"}
+        ],
+        "following": [
+            {"user_id": "002"},
+            {"user_id": "003"}
+        ]
+    },
+    {
+        "user_id": "002",
+        "username": "david",
+        "name": "David Virgilio",
+        "password": "david",
+        "email": "dvirgilioc@gmail.ca",
+        "profile_pic": "avatar2",
+        "followers": [
+            {"user_id": "001"},
+            {"user_id": "003"}
+        ],
+        "following": [
+            {"user_id": "001"},
+            {"user_id": "003"}
+        ]
+    },
+    {
+        "user_id": "003",
+        "username": "fobia",
+        "name": "Fobia",
+        "password": "Fobia",
+        "email": "flobia@fobia.com",
+        "profile_pic": "avatar3",
+        "followers": [
+            {"user_id": "001"},
+            {"user_id": "002"}
+        ],
+        "following": [
+            {"user_id": "001"},
+            {"user_id": "002"}
+        ]
+    }
+
+]
