@@ -1,14 +1,50 @@
 'use client'
+import React from "react"
 import Image from "next/image"
 import style from "./add.module.sass"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 
-function Step1({sendClose}:{sendClose: (close: boolean)=> void}){
-    function handleClick(){
-        sendClose(true)
+function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: (name: String)=> void}){
+    const [image, setImage] = useState(null);
+    const [uploading, setUploading] = useState(false);
+
+    const handleFileChange = (e:any)=>{
+        setImage(e.target.files[0]);
+        // setImageName(image)
     }
+
+    const handleSubmit = async (e:any) => {
+        e.preventDefault();
+        if(!image) return;
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append("image",image);
+        const img = image as any;
+        const fileName = img.name;
+
+
+        try{
+            const response = await fetch('/api/s3-upload',{
+                method: "POST",
+                body: formData,
+            })
+            const data = await response.json();
+            console.log(data.status);
+            setUploading(false);
+
+        }catch(error){
+            console.log(error);
+            setUploading(false);
+        }
+
+        sendClose(true);
+        imageName(fileName)
+
+    }
+
     return(
         <>
             <div>
@@ -16,12 +52,17 @@ function Step1({sendClose}:{sendClose: (close: boolean)=> void}){
                 <h2>Add a Picture</h2>
             </div>
             <Image alt="Upload you image" src={"/assets/image-placeholder.svg"} height={158} width={206} />
+            <form>
+                <input type="file" accept="image/*" onChange={handleFileChange} />
+                <button onClick={handleSubmit} className="btn" type="submit" disabled={!image || uploading}>
+                    {uploading ? "Uploading...": "Upload"}
+                </button>
+            </form>
 
-            <button onClick={handleClick} className="btn" type="button">Upload picture</button>
         </>
     )
 }
-function Step2({sendClose}:{sendClose: (close: boolean)=> void}){
+function Step2({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: String}){
     function handleClose(){
         sendClose(true)
     }
@@ -32,7 +73,7 @@ function Step2({sendClose}:{sendClose: (close: boolean)=> void}){
                 <h2>Add a Caption</h2>
             </div>
             <div className={style.captionWrapper}>
-                <Image alt="The image of your post" src={"/images/new-post.jpg"} height={313} width={313} />
+                <Image alt="The image of your post" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${imageName}`} height={313} width={313} />
                 <textarea placeholder="Write a caption..."></textarea>
                 <button onClick={handleClose} className="btn">Add post</button>
             </div>
@@ -42,12 +83,18 @@ function Step2({sendClose}:{sendClose: (close: boolean)=> void}){
 
 
 export default function AddPost(){
-    const [next, setNext] = useState(false)
+    const [next, setNext] = useState(false);
+    const [name, setName] = useState("");
     const router = useRouter()
 
     const handleNext = ()=>{
         setNext(true)
     } 
+
+    const handleName = (value:any) =>{
+        setName(value)
+        console.log(name)
+    }
     const handleClose = ()=>router.back()
     return(
         <div className={style.overlay}>
@@ -63,7 +110,7 @@ export default function AddPost(){
                     </defs>
                 </svg>
                 </button>
-                {next ? <Step2 sendClose={handleClose}/> : <Step1 sendClose={handleNext} />}  
+                {next ? <Step2 sendClose={handleClose} imageName={name}/> : <Step1 sendClose={handleNext} imageName={handleName}/>}  
             </div>
         </div>
     )
