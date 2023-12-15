@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AuthProvider from './Provider';
 import './globals.sass'
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route'
+// import { authOptions } from './api/auth/[...nextauth]/route'
 
 export const metadata: Metadata = {
   title: 'Cuddles',
@@ -17,8 +17,9 @@ export default async function RootLayout({
   auth: React.ReactNode,
   dashboard: React.ReactNode,
 }) {
-  const session = await getServerSession(authOptions);
-  const isLoggedIn = session ? true : false;
+  // const session = await getServerSession(authOptions);
+  // const isLoggedIn = session ? true : false;
+  const isLoggedIn = "true"
 
 
   return (
