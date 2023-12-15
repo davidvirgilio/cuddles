@@ -31,9 +31,9 @@ export default function LogInForm(){
                 return;
             }
             
-            console.log("Log in data sent");
+            router.push("/");
             router.refresh();
-            router.push("/")
+            console.log("Log in data sent");
             }catch(error){
                 console.log(error)
             }
