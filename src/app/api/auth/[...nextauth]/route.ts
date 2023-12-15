@@ -1,20 +1,21 @@
-import NextAuth from "next-auth/next";
+import NextAuth, { NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/app/(models)/users";
 import bcrypt from "bcryptjs"
 
 
-export const authOptions = {
+
+export const authOptions:NextAuthOptions = {
     session: {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
-            name: "credentials",
+            type: "credentials",
             credentials: {},
-            async authorize(credentials) {
-                const {email, password} = credentials;
+            async authorize(credentials, req) {
+                const {email, password} = credentials as{ email: string, password: string};
                 try{
                     const user = await User.findOne({email});
                     

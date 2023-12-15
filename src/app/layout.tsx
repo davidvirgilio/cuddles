@@ -17,8 +17,7 @@ export default async function RootLayout({
   auth: React.ReactNode,
   dashboard: React.ReactNode,
 }) {
-  const options = authOptions
-  const session = await getServerSession(options);
+  const session = await getServerSession(authOptions);
   const isLoggedIn = session ? true : false;
 
 
