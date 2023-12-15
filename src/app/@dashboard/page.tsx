@@ -2,7 +2,7 @@ import Post from '@/slices/Post'
 
 const getPosts = async () =>{
   try{
-    const res = await fetch("http://localhost:3000/api/mongodb/posts",{
+    const res = await fetch("https:cuddles.davidvirgilio.me/api/mongodb/posts",{
       cache: "no-store"
     })
     return res.json();
