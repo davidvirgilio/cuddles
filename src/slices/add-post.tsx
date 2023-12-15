@@ -4,6 +4,7 @@ import Image from "next/image"
 import style from "./add.module.sass"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import PostForm from "./PostForm"
 
 
 function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: (name: String)=> void}){
@@ -32,7 +33,6 @@ function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, image
                 body: formData,
             })
             const data = await response.json();
-            console.log(data.status);
             setUploading(false);
 
         }catch(error){
@@ -62,7 +62,7 @@ function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, image
         </>
     )
 }
-function Step2({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: String}){
+function Step2({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: string}){
     function handleClose(){
         sendClose(true)
     }
@@ -74,8 +74,7 @@ function Step2({sendClose, imageName}:{sendClose: (close: boolean)=> void, image
             </div>
             <div className={style.captionWrapper}>
                 <Image alt="The image of your post" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${imageName}`} height={313} width={313} />
-                <textarea placeholder="Write a caption..."></textarea>
-                <button onClick={handleClose} className="btn">Add post</button>
+                <PostForm sendClose={handleClose} imageName={imageName}/>
             </div>
         </>
     )

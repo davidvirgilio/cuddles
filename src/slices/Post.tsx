@@ -45,7 +45,7 @@ export default function Post({posts}:{posts: any[]}){
             //Defining variables
             const username = userInfo.username;
             const profilePic = userInfo?.profile_pic;
-            const image = post.img;
+            const image = post.image;
             const caption = post.caption;
 
 
@@ -55,7 +55,7 @@ export default function Post({posts}:{posts: any[]}){
                         <Image alt={username} src={`/images/${profilePic}.jpg`} width={40} height={40}/>
                         <span>{username}</span>
                     </Link>
-                    <Image className={style.postImage} alt="Post Image" src={`/images/${image}.jpg`} width={1080} height={1080}/>
+                    <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}.jpg`} width={1080} height={1080}/>
                     <div className={style.engagement}>
                         <div className={style.icons}>
                             <button>

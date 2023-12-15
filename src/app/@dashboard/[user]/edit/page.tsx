@@ -1,3 +1,4 @@
+// 'use client'
 import users from "@/sample-data/users.json"
 import Image from "next/image";
 import style from "./edit.module.sass"
