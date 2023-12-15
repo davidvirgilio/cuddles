@@ -6,9 +6,11 @@ import style from "./user.module.sass"
 import Link from "next/link";
 import SignOut from "@/slices/SignOut";
 
+const URL = "https://cuddles.davidvirgilio.me";
+
 const getUser = async (user:any) =>{
     try{
-        const res = await fetch(`http://localhost:3000/api/mongodb/users/${user}`,{
+        const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
             cache: "no-store"
         });
         
@@ -25,7 +27,7 @@ const getUser = async (user:any) =>{
 
 const getPosts = async (userId:any) =>{
     try{
-        const res = await fetch(`http://localhost:3000/api/mongodb/posts/${userId}`,{
+        const res = await fetch(`${URL}/api/mongodb/posts/${userId}`,{
             cache: "no-store"
         })
         return res.json();
