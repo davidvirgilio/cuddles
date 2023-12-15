@@ -4,8 +4,7 @@ import User from "@/app/(models)/users";
 import bcrypt from "bcryptjs"
 
 
-
-export const authOptions:NextAuthOptions = {
+const authOptions:NextAuthOptions = {
     session: {
         strategy: "jwt",
     },
@@ -43,5 +42,5 @@ export const authOptions:NextAuthOptions = {
 
 const authHandler = NextAuth(authOptions);
 
-export { authHandler as GET, authHandler as POST} 
+export { authHandler as GET, authHandler as POST, authOptions} 
 
