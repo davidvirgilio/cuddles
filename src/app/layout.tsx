@@ -3,7 +3,6 @@ import AuthProvider from './Provider';
 import './globals.sass'
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/options'
-// import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Cuddles',
@@ -14,9 +13,6 @@ export default async function RootLayout({
   auth,
   dashboard,
   add,
-
-  // children,
-
 
 }: {
   auth: React.ReactNode,
