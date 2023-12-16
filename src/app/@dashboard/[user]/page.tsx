@@ -48,7 +48,7 @@ export default async function Page({params}:{params: {user: string}}){
     
     if(user){
         const userId = user._id;
-        const {userPosts} = await getPosts(userId);
+        const {posts} = await getPosts(userId);
         const name = user.name;
         const profilePic = user.profile_pic;
 
@@ -69,7 +69,7 @@ export default async function Page({params}:{params: {user: string}}){
                         </div>
                     </div>
                 </div>
-                <Post  posts={userPosts} users={[user]}/>
+                <Post  posts={posts} users={[user]}/>
             </>
 
         )
