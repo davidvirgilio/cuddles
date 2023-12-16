@@ -12,11 +12,9 @@ export default function LogInForm(){
 
     const handleEmail = (e:any)=>{
         setEmail(e.target.value);
-        console.log(email);
     }
     const handlePassword = (e:any)=>{
         setPassword(e.target.value);
-        console.log(password);
     }
     const handleSubmit = async (e:any)=> {
         e.preventDefault();

@@ -59,9 +59,9 @@ export default async function Page({params}:{params: {user: string}}){
                     <div>
                         <div className={style.heading}>
                             <h1>{name}</h1>
-                            <Link href={`/${userString}/edit`}>Edit Profile</Link>
+                            {/* <Link href={`/${userString}/edit`}>Edit Profile</Link> */}
                         </div>
-                        <p>Description about the user no more than 50 characters.</p>
+                        {/* <p>Description about the user no more than 50 characters.</p> */}
                         <div className={style.followButtons}>
                             <button className="btn">Follow</button>
                             {/* <button className="btn">Followers</button> */}
