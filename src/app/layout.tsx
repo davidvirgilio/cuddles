@@ -13,12 +13,16 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   auth,
   dashboard,
+  add,
+
   // children,
 
 
 }: {
   auth: React.ReactNode,
   dashboard: React.ReactNode,
+  add: React.ReactNode
+
   // children: React.ReactNode,
 
 }) {
@@ -40,7 +44,9 @@ export default async function RootLayout({
       <body>
         <AuthProvider>
           { isLoggedIn ? dashboard : auth}
+          {add}
         </AuthProvider>
+
           {/* {children} */}
       </body>
 
