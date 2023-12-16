@@ -32,10 +32,8 @@ function Navbar(){
 
 export default async function Layout({
   children,
-  add
 }: {
   children: React.ReactNode,
-  add: React.ReactNode
 
 }) {
 
@@ -46,7 +44,6 @@ export default async function Layout({
           <main className={style.main}>{children}</main>
           <Navbar />
       </div>
-      {add}
     </>
   )
 }
