@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(res,{params}){
     try{
         const {user} = params
-        const userPosts = await Post.find({user_id: user}).exec();
+        const userPosts = await Post.find({_id: user}).exec();
         return NextResponse.json({userPosts},{status:200});
         
     }catch(error){

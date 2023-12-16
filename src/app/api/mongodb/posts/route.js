@@ -9,6 +9,8 @@ export async function POST(req){
 
         return NextResponse.json({message: "Post created"},{status:201});
     }catch(error){
+        console.error("Error:", error.message);
+        console.error("Stack Trace:", error.stack);
         return NextResponse.json({message: "Error", error},{status:500});
     }
 }

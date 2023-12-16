@@ -35,7 +35,7 @@ export default function LogInForm(){
             router.refresh();
             console.log("Log in data sent");
             }catch(error){
-                console.log(error)
+                console.log("HEre I am",error)
             }
 
     }

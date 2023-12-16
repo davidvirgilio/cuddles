@@ -9,7 +9,7 @@ export default function SignUpForm(){
         name: "",
         password: "",
         email: "",
-        profile_pic: "",
+        profile_pic: "avatar1",
         followers: [],
         following: [],
     }
@@ -44,7 +44,6 @@ export default function SignUpForm(){
             });
 
             const {user} = await resUserExists.json();
-            console.log(email)
             if(user){
                 setError("This user already exists.");
                 return;

@@ -12,12 +12,25 @@ const getPosts = async () =>{
   }
 }
 
+const getUsers = async () =>{
+  try{
+    const res = await fetch("https:cuddles.davidvirgilio.me/api/mongodb/users",{
+      cache: "no-store"
+    })
+    return res.json();
+  }catch(error){
+    console.log("failed to get posts", error)
+
+  }
+}
+
 
 export default async function Page() {
 
   const {posts} = await getPosts();
+  const {users} = await getUsers();
 
   return (
-    <Post posts={posts} />
+    <Post posts={posts} users={users}/>
   )
 }

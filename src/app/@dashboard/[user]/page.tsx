@@ -1,12 +1,15 @@
 import Post from "@/slices/Post";
 import { Icon } from "@/slices/Logos";
-// import users from "@/sample-data/users.json"
 import Image from "next/image";
 import style from "./user.module.sass"
 import Link from "next/link";
 import SignOut from "@/slices/SignOut";
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { redirect } from "next/navigation";
 
 const URL = "https://cuddles.davidvirgilio.me";
+
 
 const getUser = async (user:any) =>{
     try{
@@ -36,7 +39,7 @@ const getPosts = async (userId:any) =>{
         
     }
 }
-export default async function Page({params}:{params: {user: string}}){
+export default async function Page({params}:{params: {user: string}}){    
     
     const userString = params.user;
     const {user} = await getUser(userString);
@@ -44,7 +47,7 @@ export default async function Page({params}:{params: {user: string}}){
     
     
     if(user){
-        const userId = user.user_id;
+        const userId = user._id;
         const {userPosts} = await getPosts(userId);
         const name = user.name;
         const profilePic = user.profile_pic;
@@ -52,7 +55,7 @@ export default async function Page({params}:{params: {user: string}}){
         return (
             <>
                 <div className={style.userHeader}>
-                    <Image alt={`${name}'s avatar`} src={`/images/${profilePic}.jpg`}  width={100} height={100}/>
+                    <Image alt={`${name}'s avatar`} src={`/images/${profilePic}`}  width={100} height={100}/>
                     <div>
                         <div className={style.heading}>
                             <h1>{name}</h1>
@@ -66,7 +69,7 @@ export default async function Page({params}:{params: {user: string}}){
                         </div>
                     </div>
                 </div>
-                <Post  posts={userPosts}/>
+                <Post  posts={userPosts} users={[user]}/>
             </>
 
         )

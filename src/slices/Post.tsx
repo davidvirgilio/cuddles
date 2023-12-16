@@ -1,12 +1,12 @@
 'use client'
-import users from "@/sample-data/users.json"
+// import users from "@/sample-data/users.json"
 import Image from "next/image"
 import style from "./posts.module.sass"
 import React from "react"
 import { useState } from "react"
 import Link from "next/link"
 
-export default function Post({posts}:{posts: any[]}){
+export default function Post({posts, users}:{posts: any[], users: any[]}){
 
     const [showComments, setShowComments] = useState(false);
 
@@ -14,11 +14,27 @@ export default function Post({posts}:{posts: any[]}){
         setShowComments(!showComments);
     }
 
-    const showPosts = posts.map((post, index)=>{
+
+    // sort by name
+    const sortedPosts = posts.sort((a, b) => {
+      const nameA = a.createdAt;
+      const nameB = b.createdAt;
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      return 0;
+    });
+
+
+
+    const showPosts = sortedPosts.map((post, index)=>{
         
         //Looking for the user info
         const userId = post.user_id;
-        const userInfo = users.find(({user_id})=> user_id === userId);
+        const userInfo = users.find(({_id})=> _id === userId);
         
         //getting comments
         const commentsArray = post.comments;
@@ -45,17 +61,17 @@ export default function Post({posts}:{posts: any[]}){
             //Defining variables
             const username = userInfo.username;
             const profilePic = userInfo?.profile_pic;
-            const image = post.image;
+            const image = post.img;
             const caption = post.caption;
 
 
             return (
                 <div key={index} className={style.post}>
                     <Link className={style.userInfo} href={username}>
-                        <Image alt={username} src={`/images/${profilePic}.jpg`} width={40} height={40}/>
+                        <Image alt={username} src={`/images/${profilePic}`} width={40} height={40}/>
                         <span>{username}</span>
                     </Link>
-                    <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}.jpg`} width={1080} height={1080}/>
+                    <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={1080} height={1080}/>
                     <div className={style.engagement}>
                         <div className={style.icons}>
                             <button>

@@ -1,11 +1,41 @@
 'use client'
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { NextResponse } from "next/server";
 
 
 export default function PostForm({sendClose, imageName}:{sendClose: (close: Boolean)=> void, imageName: string}){
+    
+    const {data: session} = useSession();
+    const email = session?.user?.email;
+
+    const startUser = {
+        _id: "",
+    }
+    const [user, setUser] = useState(startUser);
+
+
+    const getUser = async(email: string)=>{
+        try{
+            const resUserInfo = await fetch("api/mongodb/userExists",{
+                method:"POST",
+                headers:
+                {"Content-Type":"application/json"},
+                body: JSON.stringify({email}),
+            })
+            const {user} = await resUserInfo.json();
+            setUser(user)
+        }catch(error){
+            console.log("Error:",error)
+        }
+    }
+    useEffect(() => {
+        getUser(email as string);
+    }, [email]);
+
     const startPostData = {
-        image: imageName,
+        img: imageName,
         caption: "",
         user_id: "",
         likes: [],
@@ -15,10 +45,11 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
     const [formData, setFormData] = useState(startPostData);
     const router = useRouter();
 
+
+
     const handleChange = (e:any)  =>{
         const value = e.target.value;
         const name = e.target.name;
-        console.log(formData)
 
         setFormData((prevState)=>({
             ...prevState,
@@ -28,6 +59,8 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
 
     const handleSubmit = async (e:any)=>{
         e.preventDefault();
+        const userId = user?._id
+        formData.user_id=  userId;
         const res = await fetch("/api/mongodb/posts/", {
             method:"POST",
             body: JSON.stringify({formData}),
@@ -40,6 +73,7 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
             throw new Error('Failed to create post' + errorData);
 
         }
+        router.refresh()
         router.back();
 
         console.log("Image Posted")
