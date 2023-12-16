@@ -2,7 +2,6 @@
 import React, { useState, useEffect} from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { NextResponse } from "next/server";
 
 
 export default function PostForm({sendClose, imageName}:{sendClose: (close: Boolean)=> void, imageName: string}){
@@ -60,7 +59,7 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
     const handleSubmit = async (e:any)=>{
         e.preventDefault();
         const userId = user?._id
-        formData.user_id=  userId;
+        formData.user_id = userId;
         const res = await fetch("/api/mongodb/posts/", {
             method:"POST",
             body: JSON.stringify({formData}),

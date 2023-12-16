@@ -30,7 +30,8 @@ export const authOptions:NextAuthOptions = {
                         return null;
                     }
 
-                    return user;
+                    console.log(user)
+                    return user
                 }catch(error){
                     console.log("Error", error)
                 }

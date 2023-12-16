@@ -1,4 +1,5 @@
 import Post from "@/slices/Post";
+import User from "@/app/(models)/users";
 import { Icon } from "@/slices/Logos";
 import Image from "next/image";
 import style from "./user.module.sass"
@@ -7,6 +8,7 @@ import SignOut from "@/slices/SignOut";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { redirect } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const URL = "https://cuddles.davidvirgilio.me";
 // const URL = "https://localhost:3000"
@@ -39,11 +41,16 @@ const getPosts = async (userId:any) =>{
         
     }
 }
-export default async function Page({params}:{params: {user: string}}){    
-    
+export default async function Page({params}:{params: {user: string}}){ 
+
+    const session = await getServerSession(authOptions);
+
+    const sessionEmail = session?.user?.email
+
     const userString = params.user;
     const {user} = await getUser(userString);
-    
+
+    const profile = user.email == sessionEmail ? true : false;
     
     
     if(user){
@@ -62,10 +69,11 @@ export default async function Page({params}:{params: {user: string}}){
                             {/* <Link href={`/${userString}/edit`}>Edit Profile</Link> */}
                         </div>
                         {/* <p>Description about the user no more than 50 characters.</p> */}
+                        
                         <div className={style.followButtons}>
                             <button className="btn">Follow</button>
                             {/* <button className="btn">Followers</button> */}
-                            <SignOut />
+                            {profile && <SignOut />}
                         </div>
                     </div>
                 </div>

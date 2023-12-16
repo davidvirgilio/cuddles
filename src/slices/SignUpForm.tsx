@@ -2,6 +2,7 @@
 import React, {useState} from "react";
 import { useRouter } from "next/navigation";
 import { hashPassword } from "@/slices/hash";
+import { signIn } from "next-auth/react";
 
 export default function SignUpForm(){
     const startingUserData = {
@@ -9,7 +10,7 @@ export default function SignUpForm(){
         name: "",
         password: "",
         email: "",
-        profile_pic: "avatar1",
+        profile_pic: "avatar2.jpg",
         followers: [],
         following: [],
     }
@@ -65,12 +66,14 @@ export default function SignUpForm(){
             if(res.ok){
                 const form = e.target;
                 form.reset();
+
             }else{
                 throw new Error('Failed to create user');
             }
 
+
             router.refresh();
-            router.push("/");
+            router.push("/log-in");
 
 
             //  console.log("Submitted");
