@@ -9,7 +9,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { redirect } from "next/navigation";
 
 const URL = "https://cuddles.davidvirgilio.me";
-
+// const URL = "https://localhost:3000"
 
 const getUser = async (user:any) =>{
     try{
