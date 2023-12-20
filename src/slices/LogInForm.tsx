@@ -48,7 +48,6 @@ export default function LogInForm(){
                     name="email"
                     placeholder="jbones@cuddles.ca"
                     onChange={handleEmail}
-                    maxLength={20}
                     autoComplete="true"/>
             </div>
             <div>
