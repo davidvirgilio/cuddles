@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, use} from "react";
-
+import style from "./posts.module.sass";
 
 export default function Like({postId, userId, initialLikes}:{postId: string, userId: string, initialLikes: string[]}){
 
@@ -33,7 +33,7 @@ export default function Like({postId, userId, initialLikes}:{postId: string, use
     };
 
     return (
-        <button onClick={handleLikeToggle} className={`like-button ${hasLiked ? 'liked' : ''}`}>
+        <button onClick={handleLikeToggle} className={`${style.likeButton} ${hasLiked ? 'liked' : ''}`}>
             {hasLiked ? (
                 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="36" viewBox="0 0 34 36" fill="none">
                     <path d="M14.2592 35.9987L13.3472 35.2781C0.202589 24.8834 -0.309685 16.8897 0.0815579 13.9343C0.464357 11.0267 2.09125 8.81714 4.65826 7.71096C7.5574 6.46405 10.0878 6.95099 12.1031 8.12472C14.2564 2.42496 18.8275 0.173199 22.6442 0.00994627C27.4461 -0.192712 31.7103 2.71769 33.2753 7.26342C38.1926 21.5508 16.1957 34.8475 15.2584 35.4076L14.2592 36.0015V35.9987Z" fill="url(#paint0_linear_310_391)"/>
@@ -60,7 +60,7 @@ export default function Like({postId, userId, initialLikes}:{postId: string, use
                     </defs>
                 </svg>
                 )}
-                ({likes?.length})
+                {likes?.length === 0 ? '' : (<span className={style.numberOfLikes}>{likes?.length}</span>)}
         </button>
     );
 
