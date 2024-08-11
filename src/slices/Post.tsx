@@ -13,12 +13,13 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
     const {data: session} = useSession();
     const email = session?.user?.email;
 
+    
     const startUser = {
         _id: "",
     }
     const [user, setUser] = useState(startUser);
-
-
+    
+    
     const getUser = async(email: string)=>{
         try{
             const resUserInfo = await fetch("api/mongodb/userExists",{
@@ -37,7 +38,7 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
         getUser(email as string);
     }, [email]);
 
-    const userId = user?._id
+    const userId = user?._id;
 
     const [showComments, setShowComments] = useState(false);
 
@@ -64,8 +65,8 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
     const showPosts = sortedPosts.map((post, index)=>{
         
         //Looking for the user info
-        const userId = post.user_id;
-        const userInfo = users.find(({_id})=> _id === userId);
+        const postUserId = post.user_id;
+        const userInfo = users.find(({_id})=> _id === postUserId);
         
         //getting comments
         const commentsArray = post.comments;
@@ -105,7 +106,7 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
                     <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={1080} height={1080}/>
                     <div className={style.engagement}>
                         <div className={style.icons}>
-                            <Like postId={post._id} userId={userId}/>
+                            <Like postId={post._id} userId={userId} initialLikes={post.likes}/>
                             <button>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="36" viewBox="0 0 48 36" fill="none">
                                     <g clipPath="url(#clip0_253_27)">
