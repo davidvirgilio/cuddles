@@ -15,8 +15,8 @@ export default function Comments({postId}:{postId: string}){
 
     const readComments = async() => {
         try{
-            const response = await fetch(`../api/mongodb/comment?_id=${postId}`,{
-                cache: "force-cache",
+            const response = await fetch(`../api/mongodb/comment/${postId}`,{
+                cache: "no-cache",
             });
 
             if (response.ok){
@@ -47,29 +47,27 @@ export default function Comments({postId}:{postId: string}){
 
     useEffect(() =>{
         readComments();
-    },[]);
+    }),[postId];
     
     useEffect(() =>{
         commentsArray.forEach((comment:any) =>{
             getUser(comment.commenter);
+            console.log("activated")
         });
     },[commentsArray]);
-
-    
-
-
-    
 
     const comments = commentsArray.map((comment: any, index: number)=>{
         const commenterId = comment.commenter;
         const commentText = comment.comment;
         const userData = commentsByUser[commenterId];
+        
         const username = userData?.username;
-        const image = userData?.avatar;
+        const image = userData?.avatar || "avatar2.jpg";
+        console
 
         return(
             <div key={index} className={style.comment}>
-                <Image className={style.userThumbnail} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={40} height={40}/>
+                <Image className={style.userThumbnail} alt="User avatar" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={40} height={40}/>
                 <div>
                     <span className={style.username}>{username ? `${username}` : "Loading..."}</span>
                     <span> {commentText}</span>

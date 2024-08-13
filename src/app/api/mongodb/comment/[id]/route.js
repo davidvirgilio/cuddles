@@ -4,11 +4,10 @@ import { NextResponse } from "next/server";
 
 //The PATCH method is used to apply partial modifications to a resource. It's essentially a way to update specific parts of a resource without replacing the entire thing. 
 
-export async function GET(request){
+export async function GET(request, { params }){
     try{
-        const { searchParams } = new URL(request.url);
-        const postId = searchParams.get("_id");
-    
+        const postId = params.id;
+
         if (!postId) {
             return NextResponse.json({ message: "_id is required" }, { status: 400 });
         }
