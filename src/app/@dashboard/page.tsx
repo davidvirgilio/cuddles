@@ -1,8 +1,11 @@
 import Post from '@/slices/Post'
 
+
+const URL = process.env.NEXTAUTH_URL;
+
 const getPosts = async () =>{
   try{
-    const res = await fetch("https:cuddles.davidvirgilio.me/api/mongodb/posts",{
+    const res = await fetch(`${URL}/api/mongodb/posts`,{
       cache: "no-store"
     })
     return res.json();
@@ -14,7 +17,7 @@ const getPosts = async () =>{
 
 const getUsers = async () =>{
   try{
-    const res = await fetch("https:cuddles.davidvirgilio.me/api/mongodb/users",{
+    const res = await fetch(`${URL}/api/mongodb/users`,{
       cache: "no-store"
     })
     return res.json();

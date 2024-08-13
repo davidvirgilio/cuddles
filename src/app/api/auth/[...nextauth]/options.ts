@@ -22,15 +22,11 @@ export const authOptions:NextAuthOptions = {
                     if(!user){
                         return null;
                     }
-                    const passwordMatch = await bcrypt.compare(password, user.password);
-                    console.log(passwordMatch)
-            
+                    const passwordMatch = await bcrypt.compare(password, user.password)            
 
                     if(!passwordMatch){
                         return null;
                     }
-
-                    console.log(user)
                     return user
                 }catch(error){
                     console.log("Error", error)

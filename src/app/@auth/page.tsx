@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import styles from './page.module.sass'
 import Link from 'next/link'
 import { Icon } from '@/slices/Logos'

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 import AuthProvider from './Provider';
-import './globals.sass'
+import './globals.sass';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/options'
+import { authOptions } from './api/auth/[...nextauth]/options';
 
 export const metadata: Metadata = {
   title: 'Cuddles',
@@ -13,26 +13,19 @@ export default async function RootLayout({
   auth,
   dashboard,
   add,
+  comments,
 
 }: {
   auth: React.ReactNode,
   dashboard: React.ReactNode,
-  add: React.ReactNode
-
-  // children: React.ReactNode,
+  add: React.ReactNode,
+  comments: React.ReactNode
 
 }) {
-  // const session = await getServerSession(authOptions);
   const session = await getServerSession(authOptions);
   const isLoggedIn = session ? true : false;
-
-
-  // // Check if the user is not logged in and trying to access an authenticated route
-  // if (!session && authOptions.pages?.signIn) {
-  //   // Redirect to the sign-in page (adjust the path as needed)
-  //   redirect(authOptions.pages.signIn);
-  //   // return null; // Return null to prevent rendering of the rest of the component
-  // }
+  // console.log(session)
+  // console.log(isLoggedIn)
 
 
   return (
@@ -41,9 +34,9 @@ export default async function RootLayout({
         <AuthProvider>
           { isLoggedIn ? dashboard : auth}
           {add}
+          {comments}
         </AuthProvider>
 
-          {/* {children} */}
       </body>
 
     </html>

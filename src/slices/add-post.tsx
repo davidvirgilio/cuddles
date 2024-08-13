@@ -1,7 +1,7 @@
 'use client'
 import React from "react"
 import Image from "next/image"
-import style from "./add.module.sass"
+import style from "../slices/style/add.module.sass"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import PostForm from "./PostForm"
@@ -13,7 +13,6 @@ function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, image
 
     const handleFileChange = (e:any)=>{
         setImage(e.target.files[0]);
-        // setImageName(image)
     }
 
     const handleSubmit = async (e:any) => {

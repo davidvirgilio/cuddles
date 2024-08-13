@@ -7,14 +7,12 @@ import Link from "next/link";
 import SignOut from "@/slices/SignOut";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
-import { redirect } from "next/navigation";
-import { useState, useEffect } from "react";
 
-const URL = "https://cuddles.davidvirgilio.me";
-// const URL = "https://localhost:3000"
+const URL = process.env.NEXTAUTH_URL;
 
 const getUser = async (user:any) =>{
     try{
+        // console.log(user)
         const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
             cache: "no-store"
         });
@@ -50,7 +48,7 @@ export default async function Page({params}:{params: {user: string}}){
     const userString = params.user;
     const {user} = await getUser(userString);
 
-    const profile = user.email == sessionEmail ? true : false;
+    const profile = user?.email == sessionEmail ? true : false;
     
     
     if(user){

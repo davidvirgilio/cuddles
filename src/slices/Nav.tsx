@@ -10,36 +10,39 @@ export default function Navbar(){
 
     const {data: session} = useSession();
     const email = session?.user?.email;
-
-    const [username, setUserName] = useState('cuddles');
+    const [username, setUserName] = useState('');
 
 
     const getUser = async(email: string)=>{
         try{
             const resUserInfo = await fetch("api/mongodb/userExists",{
                 method:"POST",
-                headers:
-                {"Content-Type":"application/json"},
+                headers: {"Content-Type":"application/json"},
                 body: JSON.stringify({email}),
-            })
+            });
+
+            if(!resUserInfo.ok){
+                throw new Error(`Error: ${resUserInfo.status}`);
+            }
+
             const {user} = await resUserInfo.json();
-            const username = user.username;
-            setUserName(username)
+            setUserName(user.username)
         }catch(error){
-            console.log("I couldn't fix this error, but it's running smoothly. The issue is related to the username call for the navigation bar.",error)
+            console.log("Error fetching username",error)
         }
     }
     useEffect(() => {
-        getUser(email as string);
+        if(email){
+            getUser(email);
+        }
     }, [email]);
-
 
     return(
         <nav className={style.navBar}>
             <ul>
-                <li><Link href="/"><Image alt="Home" src='/assets/icon-home.svg' width={54.1} height={50}/></Link></li>
-                <li><Link href="/add" scroll={false}><Image alt="Add a new post" src='/assets/icon-add.svg' width={80} height={80}/></Link></li>
-                <li><Link href={username}><Image alt="Profile" src='/assets/icon-profile.svg' width={50} height={50}/></Link></li>
+                <li><Link href="/"><Image alt="Home" src='/assets/icon-home.svg' width={55} height={50}/></Link></li>
+                <li><Link href="/add" scroll={false}><Image alt="Add a new post" src='/assets/icon-add.svg' width={81} height={80}/></Link></li>
+                <li><Link href={`/${username}`}><Image alt="Profile" src='/assets/icon-profile.svg' width={50} height={50}/></Link></li>
             </ul>
         </nav>
     )

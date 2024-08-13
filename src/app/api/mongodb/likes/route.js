@@ -40,6 +40,7 @@ export async function PATCH(req){
         await post.save();
 
         return NextResponse.json({ message: "Likes updated", likes: post.likes }, { status: 200 });
+        
     } catch (error) {
         console.error("Error:", error.message);
         console.error("Stack Trace:", error.stack);

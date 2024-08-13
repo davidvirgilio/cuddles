@@ -1,0 +1,50 @@
+@use '../../app/_variables' as var
+    
+.overlay
+    @include var.full
+    @include var.flex
+    position: fixed
+    justify-content: flex-end
+    align-items: stretch
+    bottom: 0
+    left: 0
+    background: #1115
+    .commentsWrapper
+        @include var.flex
+        background-color: #fff
+        padding: 1rem 1rem
+        position: relative
+        border-radius: 3rem 3rem 0 0
+
+        h2
+            border-block-end: 0.2rem solid var.$red
+            padding: 1rem
+            text-align: center
+            width: 100%
+
+        .comment
+            @include var.flex(row)
+            padding: 2rem 3rem 0
+            align-items: flex-start
+            gap: 1rem
+            width: 100%
+            &>div
+                @include var.flex
+                align-items: flex-start
+            .username
+                font-weight: 600
+                font-family: var.$futura
+                font-size: 1.8rem
+
+
+.userThumbnail
+    @include var.circle
+    height: 5rem
+    width: 5rem
+    border: 0.2rem solid var.$orange 
+
+    
+.closeButton
+    position: absolute
+    top: 2.5rem
+    right: 2.5rem
