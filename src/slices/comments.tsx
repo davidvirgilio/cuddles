@@ -1,10 +1,19 @@
 'user client'
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation";
 import style from "./style/comments.module.sass"
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import CommentForm from "./forms/commentForm";
+
 
 export default function Comments({postId}:{postId: string}){
+
+    const {data: session} = useSession();
+    const user = session?.user;
+    const userImage = user?.profile_pic;
+    const fullName = user?.name
+    const userId = user?.id
 
     const [commentsArray, setComments] = useState([]);
     const [commentsByUser, setCommentsByUser] = useState<{ [key: string]: any }>({});
@@ -13,7 +22,7 @@ export default function Comments({postId}:{postId: string}){
     const router = useRouter()
     const handleClose = () => router.back()
 
-    const readComments = async() => {
+    const readComments = useCallback(async() => {
         try{
             const response = await fetch(`../api/mongodb/comment/${postId}`,{
                 cache: "no-cache",
@@ -27,43 +36,40 @@ export default function Comments({postId}:{postId: string}){
         }catch(error){
             console.error("Error:", error);
         }
-    }
-
-    const getUser = async(userId: string)=>{
-        try{
-            if(!commentsByUser[userId]){
-                const responseUsername = await fetch(`../api/mongodb/userExists?_id=${userId}`);
-                const {userData} = await responseUsername.json();
-                setCommentsByUser((prevItems) => ({
-                    ...prevItems,
-                    [userId]: userData,
-                }));
-            }
-        
-        }catch(error){
-            console.log("Error:",error)
-        }
-    }
+    },[postId]);
 
     useEffect(() =>{
         readComments();
-    }),[postId];
+    },[readComments]);
     
     useEffect(() =>{
+        const getUser = async(userId: string)=>{
+            try{
+                if(!commentsByUser[userId]){
+                    const responseUsername = await fetch(`../api/mongodb/userExists?_id=${userId}`);
+                    const {userData} = await responseUsername.json();
+                    setCommentsByUser((prevItems) => ({
+                        ...prevItems,
+                        [userId]: userData,
+                    }));
+                }
+            
+            }catch(error){
+                console.log("Error:",error)
+            }
+        }
         commentsArray.forEach((comment:any) =>{
-            getUser(comment.commenter);
-            console.log("activated")
+            getUser(comment.commenterId);
         });
-    },[commentsArray]);
+    },[commentsArray, commentsByUser]);
 
     const comments = commentsArray.map((comment: any, index: number)=>{
-        const commenterId = comment.commenter;
+        const commenterId = comment.commenterId;
         const commentText = comment.comment;
         const userData = commentsByUser[commenterId];
         
         const username = userData?.username;
         const image = userData?.avatar || "avatar2.jpg";
-        console
 
         return(
             <div key={index} className={style.comment}>
@@ -92,20 +98,16 @@ export default function Comments({postId}:{postId: string}){
                 </svg>
             </button>
             {
-                commentsArray.length > 0 && comments
-            }
-                <form method="post">
-                    <div>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Leave a comment"
-                            autoComplete="false"
-                            required={true}
-                        />
+                commentsArray.length > 0 && (
+                    <div className={style.comments}>
+                        {comments}
                     </div>
-                </form>
+                )
+            }
+            <div className={style.newComment}>
+                <Image className={style.userThumbnail} alt={`${fullName}'s avatar`} src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${userImage}`} width={40} height={40}/>
+                <CommentForm postId={postId} commenterId={userId} onCommentAdded={readComments}/>
+            </div>
             </div>
         </div>
     )

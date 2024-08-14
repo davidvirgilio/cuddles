@@ -24,8 +24,6 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions);
   const isLoggedIn = session ? true : false;
-  // console.log(session)
-  // console.log(isLoggedIn)
 
 
   return (

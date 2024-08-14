@@ -16,17 +16,27 @@
         position: relative
         border-radius: 3rem 3rem 0 0
 
+
         h2
             border-block-end: 0.2rem solid var.$red
             padding: 1rem
             text-align: center
             width: 100%
 
+        .comments
+            @include var.flex
+            gap: 1rem
+            padding: 1.6rem 3rem 0
+            width: 100%
+            max-height: 50vh
+            overflow-y: scroll
+            justify-content: flex-start
+
         .comment
             @include var.flex(row)
-            padding: 2rem 3rem 0
             align-items: flex-start
             gap: 1rem
+            justify-content: flex-start
             width: 100%
             &>div
                 @include var.flex
@@ -35,6 +45,12 @@
                 font-weight: 600
                 font-family: var.$futura
                 font-size: 1.8rem
+        .newComment
+            @extend .comment
+            padding: 2rem 3rem
+            align-items: center
+            form
+                width: 100%
 
 
 .userThumbnail

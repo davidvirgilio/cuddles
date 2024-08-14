@@ -1,9 +1,6 @@
 import Post from "@/app/(models)/posts";
 import { NextResponse } from "next/server";
 
-
-//The PATCH method is used to apply partial modifications to a resource. It's essentially a way to update specific parts of a resource without replacing the entire thing. 
-
 export async function GET(request, { params }){
     try{
         const postId = params.id;
@@ -29,3 +26,31 @@ export async function GET(request, { params }){
     }
 
 }
+
+export async function PATCH(req, {params}) {
+    try {
+        const postId = params.id;
+        const body = await req.json();
+        const {commenterId, comment} = body.newComment;
+        const newComment = {
+            commenterId,
+            comment,
+            createdAt: new Date()
+        }
+        
+        const post = await Post.findById(postId);
+        
+        
+        post.comments.push(newComment);
+        await post.save();
+        
+        return NextResponse.json({message: "Comments updated:", comments: post.comments},{status:201})
+
+
+    }catch(error){
+        return NextResponse.json({ message: "Error", error }, { status: 500 });
+    }
+    
+}
+
+

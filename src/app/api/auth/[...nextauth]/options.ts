@@ -37,4 +37,22 @@ export const authOptions:NextAuthOptions = {
         signIn: '/log-in',
         signOut: '/'
     },
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;  // Store user ID in JWT token
+                token.username = user.username;  // Store username in JWT token
+                token.image = user.profile_pic;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            // Add custom properties to the session object
+            session.user.id = token.id;  // Include user ID in the session
+            session.user.username = token.username;  // Include username in the session
+            session.user.profile_pic = token.image; 
+            
+            return session;
+        }
+    },
 };

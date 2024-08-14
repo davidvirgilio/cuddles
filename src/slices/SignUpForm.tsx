@@ -53,7 +53,6 @@ export default function SignUpForm(){
 
             const hashedPassword:string = await hashPassword(formData.password);
             const updatedFormData = {...formData, password: hashedPassword};
-            // console.log(updatedFormData)
 
             const res = await fetch("/api/mongodb/users", {
                 method:"POST",
