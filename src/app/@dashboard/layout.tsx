@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Logo } from '@/slices/Logos'
-import style from './dashboard.module.sass'
+import style from '@/style/pages/dashboard.module.sass'
 import '../globals.sass'
 import Link from 'next/link'
 import Image from 'next/image'

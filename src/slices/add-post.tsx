@@ -1,10 +1,10 @@
 'use client'
 import React from "react"
 import Image from "next/image"
-import style from "../slices/style/add.module.sass"
+import style from "@/style/add.module.sass"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import PostForm from "./PostForm"
+import PostForm from "./forms/PostForm"
 
 
 function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: (name: String)=> void}){

@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect} from "react";
-import style from "./style/posts.module.sass";
+import style from "@/style/posts.module.sass";
 
 export default function Like({postId, userId, initialLikes}:{postId: string, userId: string, initialLikes: string[]}){
 

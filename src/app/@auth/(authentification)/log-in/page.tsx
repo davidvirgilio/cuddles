@@ -1,7 +1,7 @@
 import React from "react";
 import style from '../auth.module.sass'
 import { Icon } from "@/slices/Logos";
-import LogInForm from "@/slices/LogInForm";
+import LogInForm from "@/slices/forms/LogInForm";
 
 export default function Page(){
     return(

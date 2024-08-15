@@ -1,7 +1,7 @@
 'user client'
 import React, { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation";
-import style from "./style/comments.module.sass"
+import style from "@/style/comments.module.sass"
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import CommentForm from "./forms/commentForm";

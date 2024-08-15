@@ -1,4 +1,4 @@
-@use '../../variables' as var
+@use '../variables' as var
 
 .userHeader
     display: flex
@@ -29,10 +29,19 @@
                 font-size: 1.6rem
                 text-decoration: underline
 
-        .followButtons
+        .rowInfo
             display: flex
             justify-content: space-between
             gap: 1rem
+
+            .userNumbers
+                @include var.flex
+
+                .number
+                    font-weight: var.$omnes-semibold
+                    font-size: 2.1rem
+                span
+                    font-weight: var.$omnes-medium
 
             button
                 min-width: 9rem

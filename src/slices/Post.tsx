@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image"
-import style from "./style/posts.module.sass"
+import style from "@/style/posts.module.sass"
 import React, { useState, useEffect} from "react"
 import { useSession } from "next-auth/react";
 import Link from "next/link"

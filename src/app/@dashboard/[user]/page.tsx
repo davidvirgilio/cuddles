@@ -1,7 +1,7 @@
 import Post from "@/slices/Post";
 import { Icon } from "@/slices/Logos";
 import Image from "next/image";
-import style from "./user.module.sass"
+import style from "@/style/pages/user.module.sass"
 import SignOut from "@/slices/SignOut";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
@@ -58,6 +58,7 @@ export default async function Page({params}:{params: {user: string}}){
         const {posts} = await getPosts(userId);
         const name = user.name;
         const followers = user.followers;
+        const following = user.following;
         const profilePic = user.profile_pic;
 
         return (
@@ -69,8 +70,28 @@ export default async function Page({params}:{params: {user: string}}){
                             <h1>{name}</h1>
                             {/* <Link href={`/${userString}/edit`}>Edit Profile</Link> */}
                         </div>
+                        <div className={style.rowInfo}>
+                            <div className={style.userNumbers}>
+                                <span className={style.number}>
+                                    {posts.length}
+                                </span>
+                                <span>{posts.length == 1 ? "post" : "posts"}</span>
+                            </div>
+                            <div className={style.userNumbers}>
+                                <span className={style.number}>
+                                    {followers.length}
+                                </span>
+                                <span>{followers.length == 1 ? "follower" : "followers"}</span>
+                            </div>
+                            <div className={style.userNumbers}>
+                                <span className={style.number}>
+                                    {following.length}
+                                </span>
+                                <span>following</span>
+                            </div>
+                        </div>
                         {/* <p>Description about the user no more than 50 characters.</p> */}
-                        <div className={style.followButtons}>
+                        <div className={style.rowInfo}>
                             {
                                 !profile && (
                                     <Follow
