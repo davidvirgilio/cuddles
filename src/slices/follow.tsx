@@ -8,7 +8,7 @@ export default function Follow({followerId, toFollowId, initialFollowersArray}:{
     
     useEffect(()=>{
         setHasFollowed(followersArray.includes(followerId));
-    },[followersArray])
+    },[followersArray,followerId])
 
     const handleFollowToggle = async () => {
         try{
