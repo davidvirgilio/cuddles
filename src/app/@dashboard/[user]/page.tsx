@@ -1,14 +1,14 @@
 import Post from "@/slices/Post";
-import User from "@/app/(models)/users";
 import { Icon } from "@/slices/Logos";
 import Image from "next/image";
 import style from "./user.module.sass"
-import Link from "next/link";
 import SignOut from "@/slices/SignOut";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import Follow from "@/slices/follow";
 
 const URL = process.env.NEXTAUTH_URL;
+
 
 const getUser = async (user:any) =>{
     try{
@@ -42,8 +42,10 @@ const getPosts = async (userId:any) =>{
 export default async function Page({params}:{params: {user: string}}){ 
 
     const session = await getServerSession(authOptions);
+    
 
-    const sessionEmail = session?.user?.email
+    const sessionEmail = session?.user?.email;
+    const sessionUserId = session?.user?.id;
 
     const userString = params.user;
     const {user} = await getUser(userString);
@@ -55,6 +57,7 @@ export default async function Page({params}:{params: {user: string}}){
         const userId = user._id;
         const {posts} = await getPosts(userId);
         const name = user.name;
+        const followers = user.followers;
         const profilePic = user.profile_pic;
 
         return (
@@ -67,10 +70,16 @@ export default async function Page({params}:{params: {user: string}}){
                             {/* <Link href={`/${userString}/edit`}>Edit Profile</Link> */}
                         </div>
                         {/* <p>Description about the user no more than 50 characters.</p> */}
-                        
                         <div className={style.followButtons}>
-                            <button className="btn">Follow</button>
-                            {/* <button className="btn">Followers</button> */}
+                            {
+                                !profile && (
+                                    <Follow
+                                        toFollowId={userId}
+                                        followerId={sessionUserId}
+                                        initialFollowersArray={followers}
+                                    />
+                                )
+                            }
                             {profile && <SignOut />}
                         </div>
                     </div>
