@@ -20,16 +20,12 @@ function Header(){
 
 export default async function Layout({
   children,
-  add,
-  comments,
-  edit
+
 
 
 }: {
   children: React.ReactNode,
-  add: React.ReactNode,
-  comments: React.ReactNode,
-  edit: React.ReactNode
+
  
 }) {
 
@@ -40,9 +36,7 @@ export default async function Layout({
           <main className={style.main}>{children}</main>
           <Navbar />
       </div>
-      {add}
-      {comments}
-      {edit}
+
     </>
   )
 }
