@@ -14,15 +14,12 @@ export default async function RootLayout({
   dashboard,
   add,
   comments,
-  edit
 
 }: {
   auth: React.ReactNode,
   dashboard: React.ReactNode,
   add: React.ReactNode,
-  comments: React.ReactNode,
-  edit: React.ReactNode
-  
+  comments: React.ReactNode,  
 
 }) {
   const session = await getServerSession(authOptions);
@@ -36,7 +33,6 @@ export default async function RootLayout({
           { isLoggedIn ? dashboard : auth}
           {add}
           {comments}
-          {edit}
         </AuthProvider>
 
       </body>
