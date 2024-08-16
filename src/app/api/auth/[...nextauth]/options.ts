@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs"
 
 
 
-export const authOptions:NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt",
     },
@@ -42,7 +42,7 @@ export const authOptions:NextAuthOptions = {
             if (user) {
                 token.id = user.id;  // Store user ID in JWT token
                 token.username = user.username;  // Store username in JWT token
-                token.image = user.profile_pic;
+                token.profile_pic = user.profile_pic;
             }
             return token;
         },
@@ -50,7 +50,7 @@ export const authOptions:NextAuthOptions = {
             // Add custom properties to the session object
             session.user.id = token.id;  // Include user ID in the session
             session.user.username = token.username;  // Include username in the session
-            session.user.profile_pic = token.image; 
+            session.user.profile_pic = token.profile_pic; 
             
             return session;
         }

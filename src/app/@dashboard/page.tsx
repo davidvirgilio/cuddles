@@ -22,7 +22,7 @@ const getUsers = async () =>{
     })
     return res.json();
   }catch(error){
-    console.log("failed to get posts", error)
+    console.log("failed to get users", error)
 
   }
 }

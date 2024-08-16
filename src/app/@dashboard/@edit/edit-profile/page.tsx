@@ -17,10 +17,10 @@ export default function Page(){
 
     
     const initialUser = {
-        name: userSession?.name,
-        username: userSession?.username,
-        email: userSession?.email,
-        profile_pic: userSession?.profile_pic
+        name: userSession?.name as string,
+        username: userSession?.username as string,
+        email: userSession?.email as string,
+        profile_pic: userSession?.profile_pic as string
     }
     const [userData, setUser] = useState(initialUser);
     const [modalClose, setModalClose] = useState("");
@@ -60,12 +60,6 @@ export default function Page(){
             [name]: value,
         }));
     }
-    
-
-    //Data
-    // const name = userData?.name;
-    // const email = userData?.email;
-    // const picture = userData?.profile_pic || "avatar2.jpg";
 
     const handleClose = ()=>{
         setModalClose(style.close);
