@@ -1,22 +1,11 @@
 import User from "@/app/(models)/users";
 import { NextResponse } from "next/server";
 
-export async function GET(res,{params}){
-    try{
-        const username = params.user
-        const user = await User.findOne({username: username});
-        return NextResponse.json({user},{status:200});
-        
-    }catch(error){
-        return NextResponse.json({message: "Error", error},{status:500});
-    }
-}
-
 export async function PATCH(req, {params}) {
     try {
-        const userId = params.user;
+        const followerId = params.userId;
         const body = await req.json();
-        const newUserData = body.toFollowId;
+        const toFollowId = body.toFollowId;
         
         const followerData = await User.findById(followerId);
         const toFollowData = await User.findById(toFollowId);

@@ -2,7 +2,7 @@
 import { useState, useEffect} from "react";
 import style from "@/style/posts.module.sass";
 
-export default function Like({postId, userId, initialLikes}:{postId: string, userId: string, initialLikes: string[]}){
+export default function Like({postId, userId, initialLikes}:{postId: string, userId: any, initialLikes: string[]}){
 
     const [likes, setLikes] = useState(initialLikes || []);
     const [hasLiked, setHasLiked] = useState(false);

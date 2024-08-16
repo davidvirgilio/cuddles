@@ -1,7 +1,7 @@
 'use client'
 import React, {useEffect, useState} from "react";
 
-export default function Follow({followerId, toFollowId, initialFollowersArray}:{followerId: string, toFollowId: string, initialFollowersArray: string[]}){
+export default function Follow({followerId, toFollowId, initialFollowersArray}:{followerId: any, toFollowId: string, initialFollowersArray: string[]}){
 
     const [followersArray, setFollowing] = useState(initialFollowersArray || []);
     const [hasFollowed, setHasFollowed] = useState(false);
@@ -12,7 +12,7 @@ export default function Follow({followerId, toFollowId, initialFollowersArray}:{
 
     const handleFollowToggle = async () => {
         try{
-            const response = await fetch(`/api/mongodb/users/${followerId}`,{
+            const response = await fetch(`/api/mongodb/follow/${followerId}`,{
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -24,8 +24,8 @@ export default function Follow({followerId, toFollowId, initialFollowersArray}:{
             if(response.ok){
                 const data = await response.json();
                 setFollowing(data.followers)
-                console.log("Followers:", data.followers)
-                console.log("Following:", data.following)
+                // console.log("Followers:", data.followers)
+                // console.log("Following:", data.following)
                 setHasFollowed(!hasFollowed);
             }else{
                 console.error('Error while following/unfollowing');
@@ -40,6 +40,4 @@ export default function Follow({followerId, toFollowId, initialFollowersArray}:{
             {hasFollowed ? 'Following' : 'Follow'}
         </button>
     )
-
-
 }

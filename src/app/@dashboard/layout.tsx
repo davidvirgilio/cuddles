@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { Logo } from '@/slices/Logos'
 import style from '@/style/pages/dashboard.module.sass'
 import '../globals.sass'
-import Link from 'next/link'
-import Image from 'next/image'
 import Navbar from '@/slices/Nav'
 
 
@@ -22,8 +20,17 @@ function Header(){
 
 export default async function Layout({
   children,
+  add,
+  comments,
+  edit
+
 }: {
   children: React.ReactNode,
+  add: React.ReactNode,
+  comments: React.ReactNode,
+  edit: React.ReactNode
+
+
 
 }) {
 
@@ -34,6 +41,9 @@ export default async function Layout({
           <main className={style.main}>{children}</main>
           <Navbar />
       </div>
+      {add}
+      {comments}
+      {edit}
     </>
   )
 }

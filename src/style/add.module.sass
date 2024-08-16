@@ -9,6 +9,7 @@
     background: #2229
     .wrapper
         @include var.flex
+        animation: zoom-in 300ms ease-out
         background: white
         border-radius: 2rem
         margin: 0 auto
@@ -48,3 +49,8 @@
             top: 2rem
             right: 2rem
 
+@keyframes  zoom-in
+    from
+        transform: scale(0)
+    to 
+        transform: scale(1)

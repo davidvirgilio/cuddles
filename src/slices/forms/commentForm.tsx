@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-export default function CommentForm({postId, commenterId, onCommentAdded}:{postId: string, commenterId: string, onCommentAdded: () => void}){
+export default function CommentForm({postId, commenterId, onCommentAdded}:{postId: string, commenterId: any, onCommentAdded: () => void}){
     
     const emptyComment = {
         comment: '',

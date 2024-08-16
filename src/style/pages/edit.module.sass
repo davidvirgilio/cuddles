@@ -1,0 +1,49 @@
+@use '../variables' as var
+
+$cycles: 10turn
+$timeOut: 500ms
+    
+.profile
+    @include var.full
+    background: white
+    padding: 3rem 4rem
+    position: fixed
+    top: 0
+    rigth: 0
+    background-color: white
+    overflow: scroll
+    animation: slide-in 300ms ease-in-out
+
+
+    .profilePic
+        @include var.flex
+        gap: 1rem
+        img
+            @include var.circle
+            max-width: 10rem
+    form
+        input
+            border: none
+            border-radius: 0
+            border-bottom: 0.1rem solid var.$orange
+
+.close
+    animation: slide-out $timeOut ease-in-out
+.rotate
+    animation: rotate $timeOut
+    transform: rotate($cycles)
+@keyframes slide-in
+    from
+        right: -50rem
+    to
+        right: 0
+@keyframes slide-out
+    from
+        right: 0
+    to
+        right: -50rem
+@keyframes rotate
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate($cycles)

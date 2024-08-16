@@ -12,14 +12,10 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   auth,
   dashboard,
-  add,
-  comments,
 
 }: {
   auth: React.ReactNode,
   dashboard: React.ReactNode,
-  add: React.ReactNode,
-  comments: React.ReactNode
 
 }) {
   const session = await getServerSession(authOptions);
@@ -31,8 +27,6 @@ export default async function RootLayout({
       <body>
         <AuthProvider>
           { isLoggedIn ? dashboard : auth}
-          {add}
-          {comments}
         </AuthProvider>
 
       </body>

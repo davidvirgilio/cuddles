@@ -6,13 +6,13 @@ import SignOut from "@/slices/SignOut";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import Follow from "@/slices/follow";
+import Link from "next/link";
 
 const URL = process.env.NEXTAUTH_URL;
 
 
 const getUser = async (user:any) =>{
     try{
-        // console.log(user)
         const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
             cache: "no-store"
         });
@@ -68,6 +68,10 @@ export default async function Page({params}:{params: {user: string}}){
                     <div>
                         <div className={style.heading}>
                             <h1>{name}</h1>
+                            { profile && 
+                                <Link href={`/edit-profile/`} scroll={false}>...</Link>
+                            }
+
                             {/* <Link href={`/${userString}/edit`}>Edit Profile</Link> */}
                         </div>
                         <div className={style.rowInfo}>
@@ -101,7 +105,9 @@ export default async function Page({params}:{params: {user: string}}){
                                     />
                                 )
                             }
-                            {profile && <SignOut />}
+                            {profile && <>
+                                <SignOut />
+                            </>}
                         </div>
                     </div>
                 </div>
