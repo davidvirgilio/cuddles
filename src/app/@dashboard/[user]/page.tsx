@@ -72,7 +72,6 @@ export default async function Page({params}:{params: {user: string}}){
                                 <Link href={`/edit-profile/`} scroll={false}>...</Link>
                             }
 
-                            {/* <Link href={`/${userString}/edit`}>Edit Profile</Link> */}
                         </div>
                         <div className={style.rowInfo}>
                             <div className={style.userNumbers}>
