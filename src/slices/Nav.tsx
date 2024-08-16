@@ -10,32 +10,7 @@ export default function Navbar(){
 
     const {data: session} = useSession();
     const email = session?.user?.email;
-    const [username, setUserName] = useState('');
-
-
-    const getUser = async(email: string)=>{
-        try{
-            const resUserInfo = await fetch("api/mongodb/userExists",{
-                method:"POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify({email}),
-            });
-
-            if(!resUserInfo.ok){
-                throw new Error(`Error: ${resUserInfo.status}`);
-            }
-
-            const {user} = await resUserInfo.json();
-            setUserName(user.username)
-        }catch(error){
-            console.log("Error fetching username",error)
-        }
-    }
-    useEffect(() => {
-        if(email){
-            getUser(email);
-        }
-    }, [email]);
+   const username = session?.user.username
 
     return(
         <nav className={style.navBar}>

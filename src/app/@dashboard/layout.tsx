@@ -24,11 +24,13 @@ export default async function Layout({
   comments,
   edit
 
+
 }: {
   children: React.ReactNode,
   add: React.ReactNode,
   comments: React.ReactNode,
   edit: React.ReactNode
+ 
 }) {
 
   return (
