@@ -29,9 +29,6 @@ export default async function Layout({
   add: React.ReactNode,
   comments: React.ReactNode,
   edit: React.ReactNode
-
-
-
 }) {
 
   return (
