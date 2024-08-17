@@ -61,9 +61,10 @@ function Step1({sendClose, imageName}:{sendClose: (close: boolean)=> void, image
         </>
     )
 }
-function Step2({sendClose, imageName}:{sendClose: (close: boolean)=> void, imageName: string}){
+function Step2({sendClose, imageName, sendRefresh}:{sendClose: (close: boolean)=> void, sendRefresh: (refresh: boolean)=> void, imageName: string}){
     function handleClose(){
         sendClose(true)
+        sendRefresh(true)
     }
     return(
         <>
@@ -89,6 +90,10 @@ export default function AddPost(){
         setNext(true)
     } 
 
+    const handleRefresh = ()=>{
+        router.refresh();
+    };
+
     const handleName = (value:any) =>{
         setName(value)
         console.log(name)
@@ -108,7 +113,7 @@ export default function AddPost(){
                     </defs>
                 </svg>
                 </button>
-                {next ? <Step2 sendClose={handleClose} imageName={name}/> : <Step1 sendClose={handleNext} imageName={handleName}/>}  
+                {next ? <Step2 sendClose={handleClose} imageName={name} sendRefresh={handleRefresh}/> : <Step1 sendClose={handleNext} imageName={handleName}/>}  
             </div>
         </div>
     )

@@ -1,10 +1,12 @@
 'use client'
 import React, {useState} from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { hashPassword } from "@/slices/hash";
 import { signIn } from "next-auth/react";
 
 export default function SignUpForm(){
+
     const startingUserData = {
         username: "",
         name: "",
@@ -22,14 +24,22 @@ export default function SignUpForm(){
     
     //Form handles
     const handleChange = (e:any)=>{
-        const value = e.target.value;
+        let value = e.target.value;
         const name = e.target.name;
+
+        if(name == "email"){
+            value = value.toLowerCase();
+        }else if(name === "username"){
+            value = value.toLowerCase().replace(/[^a-zA-Z0-9_.]/g,'');
+        }
+
         
         setFormData((prevState)=>({
             ...prevState,
             [name]: value,
         }));
     };
+
 
     const handleSubmit = async (e:any)=>{
         e.preventDefault();
@@ -50,9 +60,12 @@ export default function SignUpForm(){
                 return;
             }
 
-
             const hashedPassword:string = await hashPassword(formData.password);
-            const updatedFormData = {...formData, password: hashedPassword};
+
+            const updatedFormData = {
+                ...formData,
+                password: hashedPassword,
+            };
 
             const res = await fetch("/api/mongodb/users", {
                 method:"POST",
@@ -66,13 +79,18 @@ export default function SignUpForm(){
                 const form = e.target;
                 form.reset();
 
+                await signIn('credentials',{
+                    email,
+                    password: formData.password,
+                    redirect: false
+                });
             }else{
                 throw new Error('Failed to create user');
             }
 
 
+            router.push("/");
             router.refresh();
-            router.push("/log-in");
 
 
             //  console.log("Submitted");
@@ -92,6 +110,7 @@ export default function SignUpForm(){
                         name="name"
                         placeholder="James Bones"
                         autoComplete="true"
+                        maxLength={30}
                         required={true}
                         value={formData.name}
                     />
