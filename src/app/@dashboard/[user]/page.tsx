@@ -1,12 +1,14 @@
 import Post from "@/slices/Post";
 import { Icon } from "@/slices/Logos";
 import Image from "next/image";
-import style from "@/style/pages/user.module.sass"
 import SignOut from "@/slices/SignOut";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import Follow from "@/slices/follow";
 import Link from "next/link";
+
+// Stylesheet:
+import style from "@/style/pages/user.module.sass"
 
 const URL = process.env.NEXTAUTH_URL;
 

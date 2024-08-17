@@ -12,7 +12,8 @@ export default function EditProfile(){
 
     const {data: session}= useSession();
     const activeSession = session?.user
-    const username = session?.user.username;
+    const username = activeSession?.username;
+    const userId = activeSession?.id as string;
 
     const image = activeSession?.profile_pic;
 
@@ -51,7 +52,7 @@ export default function EditProfile(){
                 <Image alt={`${username}'s picture`} src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={100} height={100}/>
                 <span>Change profile picture</span>
             </div>
-            <EditProfileForm currentUserData={profileData} />
+            <EditProfileForm currentUserData={profileData} userId={userId} />
         </div>
     </>
     )

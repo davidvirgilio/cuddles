@@ -1,9 +1,27 @@
+/**
+ * EditProfileForm component.
+ * 
+ * This component allows users to edit their profile information.
+ * 
+ * @param {object} props - Component props.
+ * @param {any} props.currentUserData - Current user data.
+ * @param {string} props.userId - User ID.
+ * 
+ * @example
+ * <EditProfileForm currentUserData={{ name: 'John Doe', username: 'johndoe', email: 'johndoe@example.com' }} userId="1234567890" />
+ */
+
 'use client'
+
 import { useState} from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-export default function EditProfileForm({currentUserData}:{currentUserData: any}){
+export default function EditProfileForm({currentUserData, userId}:{currentUserData: any, userId: string}){
 
-    const [userData, setUser] = useState(currentUserData);
+    const [newData, setUser] = useState(currentUserData);
+    const router = useRouter();
+    const { data: session, update } = useSession();
 
     
     const handleChange = (e:any)=>{
@@ -16,8 +34,37 @@ export default function EditProfileForm({currentUserData}:{currentUserData: any}
         }));
     }
 
+
+    const handleSubmit = async(e:any)=>{
+        e.preventDefault();
+
+        try{
+            const response = await fetch(`/api/mongodb/users/${userId}`, {
+                method: "PATCH",
+                body: JSON.stringify(newData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if(response.ok){
+                const form = e.target;
+                form.reset();
+            }else{
+                throw new Error('Failed to update user info');
+            }
+
+            await update(newData);
+            router.push(`/${newData.username}`);
+            router.refresh()
+
+        }catch(error){
+            console.error(error);
+        }
+    }
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="name">name:</label>
                 <input
@@ -25,7 +72,7 @@ export default function EditProfileForm({currentUserData}:{currentUserData: any}
                     name="name"
                     id="name"
                     type="text"
-                    value={userData.name}/>
+                    value={newData.name}/>
             </div>
             <div>
                 <label htmlFor="username">username:</label>
@@ -34,7 +81,7 @@ export default function EditProfileForm({currentUserData}:{currentUserData: any}
                     id="username"
                     name="username"
                     type="text"
-                    value={userData.username}/>
+                    value={newData.username}/>
             </div>
             <div>
                 <label htmlFor="email">email:</label>
@@ -43,7 +90,7 @@ export default function EditProfileForm({currentUserData}:{currentUserData: any}
                     id="email"
                     name="email"
                     type="email"
-                    value={userData.email}/>
+                    value={newData.email}/>
             </div>
             <div>
                 <label htmlFor="about">about:</label>

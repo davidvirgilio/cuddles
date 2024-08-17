@@ -38,12 +38,19 @@ export const authOptions: NextAuthOptions = {
         signOut: '/'
     },
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, trigger, session, user }) {
             if (user) {
                 token.id = user.id;  // Store user ID in JWT token
                 token.username = user.username;  // Store username in JWT token
                 token.profile_pic = user.profile_pic;
             }
+            if (trigger === "update") {
+              // Note, that `session` can be any arbitrary object, remember to validate it!
+              token.name = session.name
+              token.username = session.username
+              token.email = session.email
+            }
+        
             return token;
         },
         async session({ session, token }) {
@@ -53,6 +60,6 @@ export const authOptions: NextAuthOptions = {
             session.user.profile_pic = token.profile_pic; 
             
             return session;
-        }
+        },
     },
 };
