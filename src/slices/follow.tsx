@@ -24,8 +24,6 @@ export default function Follow({followerId, toFollowId, initialFollowersArray}:{
             if(response.ok){
                 const data = await response.json();
                 setFollowing(data.followers)
-                // console.log("Followers:", data.followers)
-                // console.log("Following:", data.following)
                 setHasFollowed(!hasFollowed);
             }else{
                 console.error('Error while following/unfollowing');

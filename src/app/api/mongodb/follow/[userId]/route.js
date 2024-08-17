@@ -18,15 +18,11 @@ export async function PATCH(req, {params}) {
         } else{
             followerData.following.splice(doIFollowThey, 1);
         }
-        // console.log("Following",followerData.following)
-        console.log("Followers",toFollowData.followers)
 
         if(toFollowIndex === -1){
             toFollowData.followers.push(followerId);
-            console.log("Followers after push:", toFollowData.followers)
         } else{
             toFollowData.followers.splice(toFollowIndex, 1);
-            console.log("Followers after splice:", toFollowData.followers)
         }
 
         await followerData.save();
