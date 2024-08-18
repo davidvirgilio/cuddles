@@ -20,6 +20,7 @@ import { useSession } from "next-auth/react";
 export default function EditProfileForm({currentUserData, userId}:{currentUserData: any, userId: string}){
 
     const [newData, setUser] = useState(currentUserData);
+    const [enableSubmit, setEnableSubmit] = useState(false);
     const router = useRouter();
     const { data: session, update } = useSession();
 
@@ -27,6 +28,7 @@ export default function EditProfileForm({currentUserData, userId}:{currentUserDa
     const handleChange = (e:any)=>{
         const value = e.target.value;
         const name = e.target.name;
+        setEnableSubmit(true);
 
         setUser((prevState:any)=>({
             ...prevState,
@@ -94,10 +96,10 @@ export default function EditProfileForm({currentUserData, userId}:{currentUserDa
             </div>
             <div>
                 <label htmlFor="about">about:</label>
-                <textarea
+                {/* <textarea
                     onChange={handleChange}
-                    id="about" placeholder="Description about the user no more than 50 characters."/>
+                    id="about" placeholder="Description about the user no more than 50 characters."/> */}
             </div>
-            <button type="submit" className="btn">Save changes</button>
+            <button type="submit" className="btn" disabled={enableSubmit ? false : true}>Save changes</button>
         </form>)
 }

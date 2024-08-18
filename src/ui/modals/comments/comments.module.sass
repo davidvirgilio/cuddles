@@ -1,0 +1,40 @@
+@use '../../../style/variables' as var
+
+.comments
+    @include var.flex
+    gap: 1rem
+    padding: 1.6rem 3rem 0
+    width: 100%
+    max-height: 50vh
+    overflow-y: scroll
+    justify-content: flex-start
+
+.comment
+    @include var.flex(row)
+    align-items: flex-start
+    gap: 1rem
+    justify-content: flex-start
+    width: 100%
+    &>div
+        @include var.flex
+        align-items: flex-start
+    .username
+        font-weight: 600
+        font-family: var.$futura
+        font-size: 1.8rem
+
+.newComment
+    @extend .comment
+    padding: 2rem 3rem
+    align-items: center
+    form
+        width: 100%
+
+.userThumbnail
+    @include var.circle
+    height: 5rem
+    width: 5rem
+    border: 0.2rem solid var.$orange 
+
+    
+

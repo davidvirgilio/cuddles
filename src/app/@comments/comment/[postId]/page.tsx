@@ -5,7 +5,7 @@
 
 'use client'
 
-import Comments from "@/slices/comments"
+import Comments from "@/ui/modals/comments/comments"
 
 
 export default function Page({params}:{params:{postId: string}}){

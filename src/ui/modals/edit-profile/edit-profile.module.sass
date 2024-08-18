@@ -1,4 +1,4 @@
-@use '../variables' as var
+@use '../../../style/variables' as var
 
 $cycles: 10turn
 $timeOut: 500ms
@@ -32,6 +32,15 @@ $timeOut: 500ms
 .rotate
     animation: rotate $timeOut
     transform: rotate($cycles)
+
+.rotate180
+    transform: rotate(180+360deg)
+    animation: rotate180 400ms ease-out
+
+.rotateBack
+    transform: rotate(0deg)
+    animation: rotate-back 400ms ease-out
+
 @keyframes slide-in
     from
         right: -50rem
@@ -47,3 +56,14 @@ $timeOut: 500ms
         transform: rotate(0deg)
     to
         transform: rotate($cycles)
+
+@keyframes rotate180
+    from
+        transform: rotate(0deg)
+    to 
+        transform: rotate(180+360deg)
+@keyframes rotate-back
+    from
+        transform: rotate(180+360deg)
+    to 
+        transform: rotate(0deg)
