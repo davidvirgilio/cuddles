@@ -16,6 +16,3 @@ module.exports =  {
     },
 
 }
-
-
-// https://cuddlesstorage.s3.us-east-2.amazonaws.com/cat-owner.jpg
