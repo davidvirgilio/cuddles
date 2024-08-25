@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import AuthProvider from './Provider';
+import AuthProvider from './provider';
 import './globals.sass';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/options';
@@ -14,14 +14,16 @@ export default async function RootLayout({
   dashboard,
   add,
   comments,
-  edit
+  edit,
+  create
 
 }: {
   auth: React.ReactNode,
   dashboard: React.ReactNode,
   add: React.ReactNode,
   comments: React.ReactNode,
-  edit: React.ReactNode
+  edit: React.ReactNode,
+  create: React.ReactNode,
   
 
 }) {
@@ -37,8 +39,8 @@ export default async function RootLayout({
           {add}
           {comments}
           {edit}
+          {create}
         </AuthProvider>
-
       </body>
       
     </html>

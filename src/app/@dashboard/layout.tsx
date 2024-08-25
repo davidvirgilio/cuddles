@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Logo } from '@/slices/Logos'
 import style from '@/style/pages/dashboard.module.sass'
-import '../globals.sass'
-import Navbar from '@/slices/Nav'
+import Navbar from '@/ui/components/navigation/navigation'
 
 
 export const metadata: Metadata = {

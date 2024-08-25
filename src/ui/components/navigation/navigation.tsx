@@ -1,16 +1,30 @@
 'use client'
-import style from '@/style/navigation.module.sass'
+import style from '@/ui/components/navigation/navigation.module.sass'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation'
+
 
 
 export default function Navbar(){
 
     const {data: session} = useSession();
-    const email = session?.user?.email;
-   const username = session?.user.username
+    const username = session?.user.username
+    const router = useRouter();
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
+        const file = event.target.files?.[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = ()=>{
+                const imageData = reader.result as string;
+                sessionStorage.setItem('image-to-upload', imageData);
+                router.push('/create/style',{scroll:false})
+            }
+            reader.readAsDataURL(file);
+        }
+    }
 
     return(
         <nav className={style.navBar}>
@@ -27,14 +41,28 @@ export default function Navbar(){
                 </li>
 
                 <li>
-                    <Link href="/add" scroll={false}>
+                    <label className={style.iconAdd}>
                         <Image
                             className={style.iconAdd}
                             alt="Add a new post"
                             src='/assets/icon-add.svg'
                             width={81}
                             height={80}/>
-                    </Link>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            className={style.hidden}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    {/* <Link href="/add" scroll={false}>
+                        <Image
+                            className={style.iconAdd}
+                            alt="Add a new post"
+                            src='/assets/icon-add.svg'
+                            width={81}
+                            height={80}/>
+                    </Link> */}
                 </li>
 
                 <li>

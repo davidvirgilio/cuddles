@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST(req){
     try{
         const body = await req.json();
-        const postData = body.formData;
-        await Post.create(postData);
+        // const postData = body.postData;
+        // console.log(body);
+        await Post.create(body);
 
         return NextResponse.json({message: "Post created"},{status:201});
     }catch(error){

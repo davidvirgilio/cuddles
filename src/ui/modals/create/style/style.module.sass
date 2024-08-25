@@ -1,0 +1,26 @@
+@use 'style/variables' as var
+
+.input
+    display: none
+
+.container
+    position: relative
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vw
+    max-width: 400px
+    max-height: 400px
+
+    .cropper
+        background: #222
+    
+.slider
+    padding-inline: 0
+    background-color: var.$red
+
+.buttons
+    @include var.flex(row)
+    gap: 10rem
+    padding-block: 2rem
+    width: 100%

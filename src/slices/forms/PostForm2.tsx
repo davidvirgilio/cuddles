@@ -5,37 +5,13 @@ import { useSession } from "next-auth/react";
 
 
 export default function PostForm({sendClose, imageName}:{sendClose: (close: Boolean)=> void, imageName: string}){
-    const URL = process.env.NEXTAUTH_URL;
+    // const URL = process.env.NEXTAUTH_URL;
     const router = useRouter();
     
     const {data: session} = useSession();
     const email = session?.user.email;
     const userId = session?.user.id;
 
-    // const startUser = {
-    //     _id: "",
-    // }
-    // const [user, setUser] = useState(startUser);
-
-
-    // const getUser = async(email: string)=>{
-    //     try{
-    //         const resUserInfo = await fetch(`${URL}/api/mongodb/userExists`,{
-    //             method:"POST",
-    //             headers:
-    //             {"Content-Type":"application/json"},
-    //             body: JSON.stringify({email}),
-    //         })
-    //         console.log(user)
-    //         const {user} = await resUserInfo.json();
-    //         setUser(user)
-    //     }catch(error){
-    //         console.log("Error:",error)
-    //     }
-    // }
-    // useEffect(() => {
-    //     getUser(email as string);
-    // }, [email]);
 
     const startPostData = {
         img: imageName,
@@ -61,9 +37,7 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
 
     const handleSubmit = async (e:any)=>{
         e.preventDefault();
-        // const userId = user?._id
-        // formData.user_id = userId;
-        const res = await fetch(`${URL}/api/mongodb/posts/`, {
+        const res = await fetch(`../api/mongodb/posts/`, {
             method:"POST",
             body: JSON.stringify({formData}),
             headers:{
@@ -78,8 +52,9 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
         router.refresh()
         router.back();
         router.back();
+        sessionStorage.clear();
 
-        console.log("Image Posted")
+        console.log(res)
 
     }
     return(
@@ -87,7 +62,7 @@ export default function PostForm({sendClose, imageName}:{sendClose: (close: Bool
             <textarea
                 placeholder="Write a caption..."
                 onChange={handleChange}
-                rows={4}
+                rows={3}
                 name="caption"
                 required={true}
                 value={formData.caption}

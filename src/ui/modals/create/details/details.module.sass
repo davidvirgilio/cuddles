@@ -1,0 +1,24 @@
+@use 'style/variables' as var
+
+.container
+    width: fit-content
+    height: 100vw
+    aspect-ratio: 1/1
+    background-color: #000
+    display: flex
+    align-items: center
+
+    .imagePost
+        width: 100%
+        height: auto
+        max-width: 40rem
+
+.caption
+    @include var.flex(row)
+    gap: 1rem
+    padding: 2rem
+
+    .avatar
+        @include var.circle
+        width: 4rem
+        height: 4rem

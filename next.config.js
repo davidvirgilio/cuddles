@@ -1,5 +1,6 @@
+const path = require('path')
 
-const nextConfig = {
+module.exports =  {
     images: {
         remotePatterns: [
             {
@@ -10,8 +11,11 @@ const nextConfig = {
             },
         ],
     },
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'src')],
+    },
+
 }
 
-module.exports = nextConfig
 
 // https://cuddlesstorage.s3.us-east-2.amazonaws.com/cat-owner.jpg

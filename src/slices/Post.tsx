@@ -47,7 +47,10 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
                         <Image alt={username} src={`/images/${profilePic}`} width={40} height={40}/>
                         <span>{username}</span>
                     </Link>
-                    <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={1080} height={1080}/>
+                    <div className={style.postImage}>
+                        <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={1080} height={1080} priority/>
+                        <div className={style.postMask}></div>
+                    </div>
                     <div className={style.engagement}>
                         <div className={style.icons}>
                             <Like postId={post._id} userId={userId} initialLikes={post.likes}/>
