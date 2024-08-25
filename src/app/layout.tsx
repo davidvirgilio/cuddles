@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import AuthProvider from '@/app/provider';
+import AuthProvider from './provider';
 import './globals.sass';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/options';
