@@ -92,9 +92,8 @@ export default function Details(){
             setUploading(false);
         }
         
+        router.replace('/')
         router.refresh()
-        router.back();
-        router.back();
         sessionStorage.removeItem('image-to-upload');
         sessionStorage.removeItem('image-cropped');
 
