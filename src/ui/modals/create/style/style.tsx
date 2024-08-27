@@ -5,7 +5,6 @@ import create from "../create.module.sass"
 import CloseButton from "@/ui/components/close-button"
 import Cropper from "react-easy-crop"
 import { Point, Area } from "react-easy-crop";
-import Link from "next/link";
 import getCroppedImg from "@/app/lib/create-image-from-crop";
 
 import { useRouter } from "next/navigation"
@@ -15,7 +14,6 @@ export default function Style(){
     const router = useRouter();
     const [crop, setCrop] = useState<Point>({x: 0, y: 0});
     const [imageUrl, setImageUrl] = useState<string>("");
-    // const [image, setImage] = useState<HTMLImageElement>();
     const [aspectRatio, setAspectRatio] = useState(0)
     const [zoom, setZoom] = useState(1);
     const [rotate, setRotate] = useState(0);
@@ -30,13 +28,10 @@ export default function Style(){
             getImageAspectRatio(imageUrl).then((originalRatio) => {
                 if(originalRatio > 3/2 ){
                     setAspectRatio(1.5);
-                    // setDidRatioChange(true);
                 }else if(originalRatio < 4/5){
                     setAspectRatio(0.8);
-                    // setDidRatioChange(true);
                 }else{
                     setAspectRatio(originalRatio);
-                    // setDidRatioChange(false);
                 }
             });
         }

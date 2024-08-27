@@ -14,12 +14,12 @@ export function createImage(url:string): Promise<HTMLImageElement>{
     image.onerror = () => {
       reject(new Error(`Could not load Image at ${url}`));
     };
-    // image.setAttribute('crossOrigin', 'anonymous') // needed to avoid cross-origin issues on CodeSandbox
+    image.setAttribute('crossOrigin', 'anonymous') // needed to avoid cross-origin issues
     image.src = url
   });
 };
   
-export function getRadianAngle(degreeValue:any) {
+export function getRadianAngle(degreeValue:number) {
   return (degreeValue * Math.PI) / 180
 }
   
@@ -106,8 +106,12 @@ export function rotateSize(width: number, height: number, rotation: number) {
   
     // As a blob
     // return new Promise((resolve, reject) => {
-    //   croppedCanvas.toBlob((file) => {
-    //     resolve(URL.createObjectURL(file as Blob))
+    //   croppedCanvas.toBlob((blob) => {
+    //     if(blob){
+    //       resolve(URL.createObjectURL(blob as Blob))
+    //     }else{
+    //       reject(new Error('Canvas is empty'));
+    //     }
     //   }, 'image/jpeg')
     // })
   }
