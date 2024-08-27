@@ -86,17 +86,17 @@ export default function Details(){
     
             }
 
-            router.refresh()
-            router.back();
-            router.back();
-            sessionStorage.removeItem('image-to-upload');
-            sessionStorage.removeItem('image-cropped');
-
+            
         }catch(error){
             console.log("Error during submission:", error);
             setUploading(false);
         }
-       
+        
+        router.refresh()
+        router.back();
+        router.back();
+        sessionStorage.removeItem('image-to-upload');
+        sessionStorage.removeItem('image-cropped');
 
     }
 
