@@ -2,10 +2,11 @@
 import { useRouter } from "next/navigation";
 
 
-export default function CloseButton({className = ''}:{className?: string}){
+export default function CloseButton({className = '', onClose}:{className?: string, onClose: (close:boolean) => void}){
     const router = useRouter();
     const handleClose = ()=>{
         router.back()
+        onClose(true)
     }
 
     return (

@@ -1,4 +1,4 @@
-@use '../../../style/variables' as var
+@use 'style/variables' as var
 
 $cycles: 10turn
 $timeOut: 500ms
@@ -10,8 +10,9 @@ $timeOut: 500ms
     position: fixed
     top: 0
     rigth: 0
+    bottom: 0
+    left: 0
     background-color: white
-    overflow: scroll
     animation: slide-in 300ms ease-in-out
 
 
@@ -40,6 +41,47 @@ $timeOut: 500ms
 .rotateBack
     transform: rotate(0deg)
     animation: rotate-back 400ms ease-out
+
+.modalWrapper
+    @include var.flex
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, 0.5)
+    
+    
+    .modal
+        @include var.flex
+        background: #fff
+        border-radius: 1rem
+        width: 80%
+
+        h2
+            padding-block: 1rem
+
+        .modalButton
+            border-top: 1px solid #ccc
+            width: 100%
+            text-align: center
+            padding: 1rem
+            font-size: 1.6rem
+            font-family: var.$omnes
+            color: #000
+
+            span
+                text-transform: none
+
+        &:visited, &:link
+            color: #000
+        .modalDelete
+            color: var.$red
+        
+
+
+
+
 
 @keyframes slide-in
     from

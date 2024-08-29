@@ -33,15 +33,15 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body>
-        <AuthProvider>
-          { isLoggedIn ? dashboard : auth}
-          {add}
-          {comments}
-          {edit}
-          {create}
-        </AuthProvider>
-      </body>
+        <body>
+          <AuthProvider>
+            { isLoggedIn ? dashboard : auth}
+            {add}
+            {comments}
+            {edit}
+            {create}
+          </AuthProvider>
+        </body>
       
     </html>
   )

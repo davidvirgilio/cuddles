@@ -58,7 +58,8 @@ export default function EditProfileForm({currentUserData, userId}:{currentUserDa
 
             await update(newData);
             router.push(`/${newData.username}`);
-            router.refresh()
+            router.refresh();
+            document.body.style.overflow = '';
 
         }catch(error){
             console.error(error);
@@ -94,12 +95,12 @@ export default function EditProfileForm({currentUserData, userId}:{currentUserDa
                     type="email"
                     value={newData.email}/>
             </div>
-            <div>
+            {/* <div>
                 <label htmlFor="about">about:</label>
-                {/* <textarea
+                <textarea
                     onChange={handleChange}
-                    id="about" placeholder="Description about the user no more than 50 characters."/> */}
-            </div>
+                    id="about" placeholder="Description about the user no more than 50 characters."/>
+            </div> */}
             <button type="submit" className="btn" disabled={enableSubmit ? false : true}>Save changes</button>
         </form>)
 }

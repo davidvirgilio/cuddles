@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react";
 import BackButton from "@/ui/components/back-button";
 import S3Image from "@/ui/components/image-from-s3-bucket";
+import urlToImage from "@/app/lib/name-image";
 
 export default function Details(){
 
@@ -31,18 +32,14 @@ export default function Details(){
     useEffect(()=>{
         const fetchImageData = async()=>{
         const url = sessionStorage.getItem('image-cropped') as string
-        async function urlToFile(url: string, mimeType: string): Promise<File> {
-            const response = await fetch(url);
-            const buffer = await response.arrayBuffer();
-            const filename = `${userId}-${Date.now()}.${mimeType.split('/')[1]}`
-            return new File([buffer], filename, { type: mimeType });
-        }
+
         if(url){
             setImageUrl(url)
 
-            const file = await urlToFile(url, "image/jpg");
+            const file = await urlToImage(url, userId, "image/jpg");
             setImage(file);
             setFileName(file.name)
+
         }else{
             console.error("No image URL found in session storage.");
         }

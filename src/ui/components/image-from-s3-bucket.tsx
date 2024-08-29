@@ -6,13 +6,15 @@ export default function S3Image<children>(
         alt,
         width,
         height,
-        className
+        className,
+        priority,
     }:{
         src: string,
         alt: string,
         width?: number,
         height?: number,
         className?: string,
+        priority?: boolean,
     }
 ){
     const URL = 'https://s3.eu-west-3.amazonaws.com/cuddles.storage'
@@ -23,5 +25,6 @@ export default function S3Image<children>(
         src={`${URL}/${src}`}
         width={width}
         height={height}
+        priority={priority}
     />);
 }

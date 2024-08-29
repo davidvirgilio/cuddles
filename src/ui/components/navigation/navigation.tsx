@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation'
+import saveImageInSession from '@/app/lib/save-image-in-session';
 
 
 
@@ -15,45 +16,12 @@ export default function Navbar(){
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
         const file = event.target.files?.[0];
-        if(file){
-            const reader = new FileReader();
-            reader.onload = (e)=>{
-                const image = document.createElement('img');
-                image.onload = (e)=>{
-                    
-                    const canvas = document.createElement("canvas");
-                    const ctx = canvas.getContext("2d");
-                    
-                    const width = image.width;
-                    const height = image.height;
-                    const ratio = width / height;
-                    // console.log('width:', width);
-                    // console.log('height:', height);
-                    // console.log('ratio:', ratio);
-                    
-                    let dWidth = width;
-                    let dHeight = height;
-                    
-                    if(width > 1080){
-                        dWidth = 1080;
-                        dHeight = 1080 / ratio;
-                    }
-                    
-                    canvas.width = dWidth;
-                    canvas.height = dHeight;
-                    // console.log('new width:', dWidth);
-                    // console.log('new height:', dHeight);
-                    ctx?.drawImage(image , 0 , 0 , dWidth , dHeight);
-                    const imgToUrl = canvas.toDataURL(file.type);
-                    sessionStorage.setItem('image-to-upload', imgToUrl);
-                }
-                const imageData = reader.result as string;
-                image.src = imageData;
+        const isSaved = saveImageInSession(file);
 
-                router.push('/create/style',{scroll:false})
-            }
-            reader.readAsDataURL(file);
+        if(isSaved){
+            router.push('/create/style',{scroll:false})
         }
+        
     }
 
     return(

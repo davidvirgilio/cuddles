@@ -4,6 +4,7 @@ import style from "@/style/posts.module.sass"
 import { useSession } from "next-auth/react";
 import Link from "next/link"
 import Like from "./like"
+import S3Image from "@/ui/components/image-from-s3-bucket";
 
 export default function Post({posts, users}:{posts: any[], users: any[]}){
 
@@ -44,11 +45,11 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
             return (
                 <div key={index} className={style.post}>
                     <Link className={style.userInfo} href={username}>
-                        <Image alt={username} src={`/images/${profilePic}`} width={40} height={40}/>
+                        <S3Image alt={username} src={profilePic} width={40} height={40}/>
                         <span>{username}</span>
                     </Link>
                     <div className={style.postImage}>
-                        <Image className={style.postImage} alt="Post Image" src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={1080} height={1080} priority/>
+                        <S3Image className={style.postImage} alt="Post Image" src={image} width={1080} height={1080} priority/>
                         <div className={style.postMask}></div>
                     </div>
                     <div className={style.engagement}>

@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import Follow from "@/slices/follow";
 import Link from "next/link";
+import S3Image from "@/ui/components/image-from-s3-bucket";
 
 // Stylesheet:
 import style from "@/style/pages/user.module.sass"
@@ -48,6 +49,7 @@ export default async function Page({params}:{params: {user: string}}){
 
     const sessionEmail = session?.user?.email;
     const sessionUserId = session?.user?.id;
+    const userImage = session?.user.profile_pic;
 
     const userString = params.user;
     const {user} = await getUser(userString);
@@ -66,7 +68,8 @@ export default async function Page({params}:{params: {user: string}}){
         return (
             <>
                 <div className={style.userHeader}>
-                    <Image alt={`${name}'s avatar`} src={`/images/${profilePic}`}  width={100} height={100}/>
+                    <S3Image src={profilePic} alt={`${name}'s profile picture`} width={100} height={100}/>
+                    {/* <Image alt={`${name}'s avatar`} src={`/images/${profilePic}`}  width={100} height={100}/> */}
                     <div>
                         <div className={style.heading}>
                             <h1>{name}</h1>

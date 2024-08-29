@@ -16,16 +16,18 @@ export default function Layout({
     const [rotate, setRotate] = useState("");
     const router = useRouter();
     const currentRoute = usePathname();
-
+    
     useEffect(()=>{
         if(currentRoute === "/edit-profile/picture"){
             setRotate(style.rotate180);
         }else{
             setRotate(style.rotateBack);
+            document.body.style.overflow = 'hidden';
         }
     },[currentRoute]);
 
     const handleClose = ()=>{
+        document.body.style.overflow = '';
         if(currentRoute === '/edit-profile'){
             setModalClose(style.close);
             setRotate(style.rotate);
