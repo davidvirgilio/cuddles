@@ -13,7 +13,7 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
     const user = session?.user;
     const userId = user?.id
 
-    // sort by name
+    // sort by time
     const sortedPosts = posts.sort((a, b) => {
       const nameA = a.createdAt;
       const nameB = b.createdAt;

@@ -1,7 +1,7 @@
 import Post from "@/slices/Post";
 import { Icon } from "@/slices/Logos";
 import Image from "next/image";
-import SignOut from "@/slices/SignOut";
+import SignOut from "@/ui/components/sign-out-button";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import Follow from "@/slices/follow";

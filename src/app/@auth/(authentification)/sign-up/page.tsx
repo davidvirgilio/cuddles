@@ -1,4 +1,4 @@
-import SignUpForm from '@/slices/forms/SignUpForm';
+import SignUpForm from '@/ui/forms/sign-up-form';
 import style from '../auth.module.sass'
 import { Icon } from "@/slices/Logos";
 

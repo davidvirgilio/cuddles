@@ -1,5 +1,5 @@
 import Post from '@/slices/Post'
-
+import Link from 'next/link';
 
 const URL = process.env.NEXTAUTH_URL;
 
@@ -34,6 +34,8 @@ export default async function Page() {
   const {users} = await getUsers();
 
   return (
-    <Post posts={posts} users={users}/>
+    <>
+      <Post posts={posts} users={users}/>
+    </>
   )
 }

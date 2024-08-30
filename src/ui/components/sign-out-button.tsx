@@ -7,9 +7,6 @@ export default function SignOut(){
         await signOut({ callbackUrl: '/'})
     }
     return(
-        <>
-            <button type="button" className="btn" onClick={handleClick}>Sign Out</button>
-        </>
-
+        <button type="button" className="btn" onClick={handleClick}>Sign Out</button>
     )
 }

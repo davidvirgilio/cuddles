@@ -151,6 +151,7 @@ export default function Style(){
         await update({profile_pic: imageFile.name});
         sessionStorage.clear();
         router.back();
+        document.body.style.overflow = "";
     }
 
     const handleClose = ()=>{
@@ -182,6 +183,7 @@ export default function Style(){
                     onCropComplete={onCropComplete}
                     objectFit={objectFit}
                 />
+                { isProfilePicture && <div className={style.shadow}></div>}
             </div>
             <div className={style.buttons}>
                 {

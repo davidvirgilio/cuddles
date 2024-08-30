@@ -1,8 +1,7 @@
 'use client'
 import React, {useState} from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { hashPassword } from "@/slices/hash";
+import { hashPassword } from "@/app/lib/hash";
 import { signIn } from "next-auth/react";
 
 export default function SignUpForm(){
@@ -12,7 +11,7 @@ export default function SignUpForm(){
         name: "",
         password: "",
         email: "",
-        profile_pic: "avatar2.jpg",
+        profile_pic: "avatar1.jpg",
         followers: [],
         following: [],
     }
@@ -89,18 +88,16 @@ export default function SignUpForm(){
             }
 
 
-            router.push("/");
-            router.refresh();
+            router.replace("/create/avatar", {scroll: false});
 
 
-            //  console.log("Submitted");
         }catch(error){
             console.error(error);
         }
     }
 
     return(
-        <form method="post" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input

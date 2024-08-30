@@ -25,3 +25,27 @@ $orange: #F60
     height: auto
     aspect-ratio: 1/1
     
+@mixin button($minWidh: 20rem)
+    font-family: $gloria
+    align-items: center
+    background: $gradient
+    border: none
+    border-radius: 1rem
+    color: white
+    display: flex
+    font-size: 1.6rem
+    gap: 1rem
+    justify-content: center
+    min-width: $minWidh
+    max-width: min-content
+    line-height: 1.6rem
+    letter-spacing: 0.1rem
+    padding: 1.5rem 2rem
+    margin: 0 auto
+    text-decoration: none
+
+@mixin redLabel
+    text-transform: uppercase
+    color: var.$red
+    font-family: var.$futura
+    
