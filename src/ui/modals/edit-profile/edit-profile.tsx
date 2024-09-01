@@ -3,13 +3,18 @@ import Image from "next/image";
 import style from "./edit-profile.module.sass"
 import { useSession } from "next-auth/react";
 import EditProfileForm from "@/ui/forms/edit-profile-form";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import saveImageInSession from "@/app/lib/save-image-in-session";
+import saveImageInSession from "@/lib/save-image-in-session";
+import deleteS3Image from "@/lib/delete-s3-image";
+import { updateAvatarOnDB } from "@/lib/update-user";
+
 
 export function Alert({sendClose}:{sendClose: (close: boolean)=>void }){
     const router = useRouter();
+    const {data: session, update} = useSession();
+    const avatar = session?.user.profile_pic;
+    const userId = session?.user.id;
 
     const handleUpload = (event: React.ChangeEvent<HTMLInputElement>)=>{
         const file = event.target.files?.[0];
@@ -19,6 +24,23 @@ export function Alert({sendClose}:{sendClose: (close: boolean)=>void }){
             router.push('create/style',{scroll:false});
         }
     }
+
+
+
+    const handleRemove = async()=>{
+        if(
+            avatar === 'avatar1.jpg' ||
+            avatar === 'avatar2.jpg' ||
+            avatar === 'avatar3.jpg'
+        ){
+        }else{
+            deleteS3Image(avatar);
+        }
+        const defaultImage = 'sample-5.jpg';
+        updateAvatarOnDB( userId, defaultImage);
+        await update({profile_pic: defaultImage});
+        sendClose(true);
+    };
     
     return(
         <div className={style.modalWrapper}>
@@ -33,7 +55,13 @@ export function Alert({sendClose}:{sendClose: (close: boolean)=>void }){
                         style={{display:'none'}}
                     />
                 </label>
-                <Link className={style.modalButton  + " " + style.modalDelete} href={'/Remove'}>Remove current Photo</Link>
+                <button 
+                    className={style.modalButton  + " " + style.modalDelete}
+                    onClick={handleRemove}
+                >
+                    Remove current Photo
+                
+                </button>
                 <button className={style.modalButton} onClick={()=>{sendClose(true)}}>Cancel</button>
             </div>
         </div>

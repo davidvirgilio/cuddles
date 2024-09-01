@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react";
 import BackButton from "@/ui/components/back-button";
 import S3Image from "@/ui/components/image-from-s3-bucket";
-import urlToImage from "@/app/lib/name-image";
+import urlToImage from "@/lib/name-image";
 
 export default function Details(){
 

@@ -1,5 +1,4 @@
-import Post from '@/slices/Post'
-import Link from 'next/link';
+import Post from "@/ui/components/show-posts/show-posts";
 
 const URL = process.env.NEXTAUTH_URL;
 

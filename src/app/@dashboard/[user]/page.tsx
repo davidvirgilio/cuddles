@@ -1,4 +1,4 @@
-import Post from "@/slices/Post";
+import Post from "@/ui/components/show-posts/show-posts";
 import { Icon } from "@/slices/Logos";
 import Image from "next/image";
 import SignOut from "@/ui/components/sign-out-button";
@@ -115,7 +115,7 @@ export default async function Page({params}:{params: {user: string}}){
                         </div>
                     </div>
                 </div>
-                <Post  posts={posts} users={[user]}/>
+                <Post  posts={posts} users={[user]} isProfile={profile}/>
             </>
 
         )

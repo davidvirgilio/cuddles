@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import saveImageInSession from '@/app/lib/save-image-in-session'
+import saveImageInSession from '@/lib/save-image-in-session'
 import S3Image from '@/ui/components/image-from-s3-bucket'
 
 

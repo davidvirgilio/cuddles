@@ -5,9 +5,10 @@ import create from "../create.module.sass"
 import CloseButton from "@/ui/components/close-button"
 import Cropper from "react-easy-crop"
 import { Point, Area } from "react-easy-crop";
-import getCroppedImg from "@/app/lib/create-image-from-crop";
+import getCroppedImg from "@/lib/create-image-from-crop";
 import { useSession } from "next-auth/react";
-import urlToImage from "@/app/lib/name-image"
+import urlToImage from "@/lib/name-image"
+import deleteS3Image from "@/lib/delete-s3-image"
 
 import { useRouter } from "next/navigation"
 
@@ -16,7 +17,7 @@ export default function Style(){
     const router = useRouter();
     const [crop, setCrop] = useState<Point>({x: 0, y: 0});
     const [imageUrl, setImageUrl] = useState<string>("");
-    const [aspectRatio, setAspectRatio] = useState(0)
+    const [aspectRatio, setAspectRatio] = useState(0);
     const [zoom, setZoom] = useState(1);
     const [rotate, setRotate] = useState(0);
     const [ratio, setRatio] = useState(1/1);
@@ -24,6 +25,7 @@ export default function Style(){
     const [objectFit, setFit] = useState<'contain' | 'cover' | 'horizontal-cover' | 'vertical-cover'>('cover');
     const [isProfilePicture, setIsProfile] = useState(false);
     const {data: session, update } = useSession();
+    const [currentAvatar, setCurrentAvatar] = useState(session?.user.profile_pic);
     const userId = session?.user.id;
     
     
@@ -114,10 +116,23 @@ export default function Style(){
             return;
         }
 
-        const imageFile = await urlToImage(profileImage, userId, "image/jpg", "avatar");
-        
+        const imageFile = await urlToImage(profileImage, userId, "image/jpg", true);
 
         // setUploading(true);
+        if(
+            currentAvatar === "avatar1.jpg" || 
+            currentAvatar === "avatar2.jpg" ||
+            currentAvatar === "avatar3.jpg"
+        ){
+            console.log('Nothing to delete')
+        }else{
+            const success = deleteS3Image(currentAvatar);
+            if(!success){
+                console.error("Failed to delete existing image.");
+            }
+        };
+
+    
         const newData = { profile_pic:  imageFile.name }
         const formData = new FormData();
         formData.append("image",imageFile);

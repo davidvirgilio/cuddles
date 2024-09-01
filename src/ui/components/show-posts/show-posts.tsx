@@ -1,17 +1,20 @@
 'use client'
-import Image from "next/image"
-import style from "@/style/posts.module.sass"
+import style from "./show-posts.module.sass"
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 import Link from "next/link"
-import Like from "./like"
+import Like from "../../../slices/like"
 import S3Image from "@/ui/components/image-from-s3-bucket";
+import PostOptions from "@/ui/modals/alert-like/post-options/post-options";
 
-export default function Post({posts, users}:{posts: any[], users: any[]}){
+export default function Post({posts, users, isProfile = false}:{posts: any[], users: any[], isProfile?: boolean}){
 
 
     const {data: session} = useSession();
     const user = session?.user;
     const userId = user?.id
+    const [showOptions, setShowOptions] = useState<number | null>(null);
+
 
     // sort by time
     const sortedPosts = posts.sort((a, b) => {
@@ -27,11 +30,11 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
     });
 
 
-
     const showPosts = sortedPosts.map((post, index)=>{
         
         //Looking for the user info
         const postUserId = post.user_id;
+        const postId = post._id;
         const userInfo = users.find(({_id})=> _id === postUserId);
         
         if(userInfo){
@@ -44,10 +47,30 @@ export default function Post({posts, users}:{posts: any[], users: any[]}){
 
             return (
                 <div key={index} className={style.post}>
-                    <Link className={style.userInfo} href={username}>
-                        <S3Image alt={username} src={profilePic} width={40} height={40}/>
-                        <span>{username}</span>
-                    </Link>
+                    <div className={style.postHeader}>
+                        <Link className={style.userInfo} href={username}>
+                            <S3Image alt={username} src={profilePic} width={40} height={40}/>
+                            <span>{username}</span>
+                        </Link>
+                        {
+                            isProfile && (
+                                <div>
+                                    <button onClick={
+                                        ()=>{
+                                        setShowOptions(
+                                            index === showOptions ? null : index
+                                        )}
+                                    }>
+                                        ...
+                                    
+                                    </button>
+
+                                    { showOptions === index && <PostOptions postId={postId} postImage={image}  sendClose={()=>setShowOptions(null)}/>}
+
+                                </div>
+                            )
+                        }
+                    </div>
                     <div className={style.postImage}>
                         <S3Image className={style.postImage} alt="Post Image" src={image} width={1080} height={1080} priority/>
                         <div className={style.postMask}></div>

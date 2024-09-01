@@ -1,12 +1,22 @@
-@use 'variables' as var
+@use 'ui/variables' as var
 
 $paddingX: 3rem
 
 .post
     border-top: 0.5rem solid var.$orange
+    
+    .postHeader
+        @include var.flex(row)
+        justify-content: space-between
+        padding: 1.5rem $paddingX
+
+        &>div>button
+            font-weight: 500
+            font-size: 2rem
+            padding-inline-start: 2rem 
+
     .userInfo
         display: flex
-        padding: 1.5rem $paddingX
         gap: 2rem
         align-items: center
         color: black
@@ -27,16 +37,14 @@ $paddingX: 3rem
 
         .postMask
             position: absolute
-            top: 0
-            left: 0
-            right: 0
-            bottom: 0
+            inset: 0
 
 
     .engagement
         @extend .userInfo
         flex-direction: column
         align-items: flex-start
+        padding: 1.5rem $paddingX
         .icons
             display: flex
             gap: 2rem
@@ -53,6 +61,7 @@ $paddingX: 3rem
                     padding: 0 0.5rem
         a
             font-size: 1.6rem
+            
     .commentButtons
         display: flex
         justify-content: space-between
@@ -66,3 +75,4 @@ $paddingX: 3rem
         gap: 1rem
         width: 100%
         
+

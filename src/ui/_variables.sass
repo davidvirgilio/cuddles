@@ -9,6 +9,7 @@ $heavy: 700
 $gradient: linear-gradient(90deg, #F03 0%, #F60 100%)
 $red: #ED002F
 $orange: #F60
+$theme: #FFF
 
 @mixin flex($direction: column)
     display: flex
@@ -48,4 +49,29 @@ $orange: #F60
     text-transform: uppercase
     color: var.$red
     font-family: var.$futura
+
+@mixin modalWrapper
+    @include flex
+    position: fixed
+    inset: 0
+    background: rgba(0, 0, 0, 0.5)
+    z-index: 1000
+
+@mixin simpleModal
+    @include flex
+    background: $theme
+    border-radius: 1rem
+    width: 80%
+
+@mixin simpleModalButton
+    border-top: 1px solid #ccc
+    width: 100%
+    text-align: center
+    padding: 1rem
+    font-size: 1.6rem
+    font-family: $omnes
+    color: #000
+    
+    
+    
     

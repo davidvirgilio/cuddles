@@ -1,7 +1,7 @@
 'use client'
 import React, {useState} from "react";
 import { useRouter } from "next/navigation";
-import { hashPassword } from "@/app/lib/hash";
+import { hashPassword } from "@/lib/hash";
 import { signIn } from "next-auth/react";
 
 export default function SignUpForm(){

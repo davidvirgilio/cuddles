@@ -1,0 +1,16 @@
+@use 'ui/variables' as var
+
+.modalWrapper
+    @include var.modalWrapper
+
+    .modal
+        @include var.simpleModal
+
+        .modalButton
+            @include var.simpleModalButton
+
+            &:first-child
+                border-top: none
+                
+            &.red
+                color: var.$red

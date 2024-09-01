@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation'
-import saveImageInSession from '@/app/lib/save-image-in-session';
+import saveImageInSession from '@/lib/save-image-in-session';
 
 
 

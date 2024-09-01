@@ -1,7 +1,7 @@
 import Post from "@/app/(models)/posts";
 import { NextResponse } from "next/server";
 
-export async function GET(res,{params}){
+export async function GET(request ,{params}){
     try{
         const user = params.user
         const posts = await Post.find({user_id: user}).exec();

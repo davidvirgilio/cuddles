@@ -1,4 +1,4 @@
-@use 'style/variables' as var
+@use 'ui/variables' as var
 
 $cycles: 10turn
 $timeOut: 500ms
@@ -43,32 +43,16 @@ $timeOut: 500ms
     animation: rotate-back 400ms ease-out
 
 .modalWrapper
-    @include var.flex
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background: rgba(0, 0, 0, 0.5)
-    
+    @include var.modalWrapper
     
     .modal
-        @include var.flex
-        background: #fff
-        border-radius: 1rem
-        width: 80%
+        @include var.simpleModal
 
         h2
             padding-block: 1rem
 
         .modalButton
-            border-top: 1px solid #ccc
-            width: 100%
-            text-align: center
-            padding: 1rem
-            font-size: 1.6rem
-            font-family: var.$omnes
-            color: #000
+            @include var.simpleModalButton
 
             span
                 text-transform: none
