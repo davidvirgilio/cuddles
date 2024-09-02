@@ -1,0 +1,125 @@
+import Post from "@/ui/components/show-posts/show-posts";
+import { Icon } from "@/ui/components/logos/logo-versions"
+import SignOut from "@/ui/components/sign-out-button";
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import FollowButton from "@/ui/components/follow-button";
+import Link from "next/link";
+import S3Image from "@/ui/components/image-from-s3-bucket";
+import { notFound } from "next/navigation";
+
+// Stylesheet:
+import style from "./profile.module.sass"
+
+const URL = process.env.NEXTAUTH_URL;
+
+
+const getUser = async (user:any) =>{
+    try{
+        const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
+            cache: "no-store"
+        });
+        
+        if (!res.ok) {
+            throw new Error('Failed to get user information');
+        }
+        return res.json();
+        
+    }catch(error){
+        console.log("failed to get user", error);
+        throw error;
+    }
+}
+
+const getPosts = async (userId:any) =>{
+    try{
+        const res = await fetch(`${URL}/api/mongodb/posts/${userId}`,{
+            cache: "no-store"
+        })
+        return res.json();
+    }catch(error){
+        console.log("failed to get user's posts", error)
+        
+    }
+}
+export default async function Profile({params}:{params: {user: string}}){ 
+
+    const session = await getServerSession(authOptions);
+    
+
+    const sessionEmail = session?.user?.email;
+    const sessionUserId = session?.user?.id;
+    const userImage = session?.user.profile_pic;
+
+    const userString = params.user;
+    const {user} = await getUser(userString);
+
+    const profile = user?.email == sessionEmail ? true : false;
+    
+    
+    if(user){
+        const userId = user._id;
+        const {posts} = await getPosts(userId);
+        const name = user.name;
+        const followers = user.followers;
+        const following = user.following;
+        const profilePic = user.profile_pic;
+
+        return (
+            <>
+                <div className={style.userHeader}>
+                    <S3Image src={profilePic} alt={`${name}'s profile picture`} width={100} height={100}/>
+                    {/* <Image alt={`${name}'s avatar`} src={`/images/${profilePic}`}  width={100} height={100}/> */}
+                    <div>
+                        <div className={style.heading}>
+                            <h1>{name}</h1>
+                            { profile && 
+                                <Link href={`/edit-profile/`} scroll={false}>...</Link>
+                            }
+
+                        </div>
+                        <div className={style.rowInfo}>
+                            <div className={style.userNumbers}>
+                                <span className={style.number}>
+                                    {posts.length}
+                                </span>
+                                <span>{posts.length == 1 ? "post" : "posts"}</span>
+                            </div>
+                            <div className={style.userNumbers}>
+                                <span className={style.number}>
+                                    {followers.length}
+                                </span>
+                                <span>{followers.length == 1 ? "follower" : "followers"}</span>
+                            </div>
+                            <div className={style.userNumbers}>
+                                <span className={style.number}>
+                                    {following.length}
+                                </span>
+                                <span>following</span>
+                            </div>
+                        </div>
+                        {/* <p>Description about the user no more than 50 characters.</p> */}
+                        <div className={style.rowInfo}>
+                            {
+                                !profile && (
+                                    <FollowButton
+                                        toFollowId={userId}
+                                        followerId={sessionUserId}
+                                        initialFollowersArray={followers}
+                                    />
+                                )
+                            }
+                            {profile && <>
+                                <SignOut />
+                            </>}
+                        </div>
+                    </div>
+                </div>
+                <Post  posts={posts} users={[user]} isProfile={profile}/>
+            </>
+
+        )
+    }else{
+        return notFound()
+    }
+}

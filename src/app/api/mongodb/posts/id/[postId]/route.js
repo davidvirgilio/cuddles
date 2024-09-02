@@ -5,7 +5,6 @@ export async function GET(request, {params}){
     try{
         const postId = params.postId
         const post = await Post.findById(postId).exec();
-        console.log(post);
         return NextResponse.json({post},{status:200});
         
     }catch(error){

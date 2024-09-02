@@ -7,8 +7,10 @@ export default function Modal({
    children: React.ReactNode
 }) {
     return(
-        <div className={style.wrapper}>
-            {children}
+        <div className={style.window}>
+            <div className={style.wrapper}>
+                {children}
+            </div>
         </div>
     )
 }

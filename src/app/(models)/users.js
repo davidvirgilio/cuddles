@@ -1,6 +1,7 @@
 /*
  * Users controller for handling users-related data.
  * Description: This module defines a Mongoose schema and model for the users collection.
+ * It helps to create the types to create a users in the mongoDB database.
  */
 
 

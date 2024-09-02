@@ -3,6 +3,7 @@ import style from "./post-options.module.sass"
 import Link from "next/link";
 import deleteS3Image from "@/lib/delete-s3-image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function PostOptions({postId, postImage, sendClose}:{postId: string, postImage: string, sendClose: (close: boolean) => void}){
     document.body.style.overflow = 'hidden';
@@ -36,6 +37,20 @@ export default function PostOptions({postId, postImage, sendClose}:{postId: stri
         document.body.style.overflow = '';
         
     }
+
+    useEffect(()=>{
+        const clickOutside = (e: MouseEvent)=>{
+            const modal = document.querySelector('.'+ style.modal);
+            if(modal && !modal.contains(e.target as Node)){
+                sendClose(true)
+                document.body.style.overflow = '';
+                window.removeEventListener('mouseup', clickOutside)
+            }
+        }
+        window.addEventListener('mouseup', clickOutside);
+    },[sendClose])
+
+
 
     return(
         <div className={style.modalWrapper}>

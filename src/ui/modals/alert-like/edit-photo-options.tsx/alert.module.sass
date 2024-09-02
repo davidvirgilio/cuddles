@@ -1,0 +1,21 @@
+@use 'ui/variables' as var
+    
+.modalWrapper
+    @include var.modalWrapper
+    
+    .modal
+        @include var.simpleModal
+
+        h2
+            padding-block: 1rem
+
+        .modalButton
+            @include var.simpleModalButton
+
+            span
+                text-transform: none
+
+        &:visited, &:link
+            color: #000
+        .modalDelete
+            color: var.$red

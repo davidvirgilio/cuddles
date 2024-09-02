@@ -3,7 +3,7 @@ import style from "./show-posts.module.sass"
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link"
-import Like from "../../../slices/like"
+import Like from "../like-button/like-button"
 import S3Image from "@/ui/components/image-from-s3-bucket";
 import PostOptions from "@/ui/modals/alert-like/post-options/post-options";
 

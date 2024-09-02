@@ -6,8 +6,7 @@
     position: fixed
     justify-content: flex-end
     align-items: stretch
-    bottom: 0
-    left: 0
+    inset: 0
     background: #1115
 
     .wrapper
@@ -30,3 +29,12 @@
     position: absolute
     top: 2.5rem
     right: 2.5rem
+
+@media (min-width:var.$small-breakpoint)
+    .overlay
+        justify-content: center
+        align-items: center
+
+        .wrapper
+            width: var.$small-breakpoint
+            border-radius: 3rem

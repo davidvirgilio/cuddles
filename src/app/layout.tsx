@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import AuthProvider from './provider';
 import './globals.sass';
-import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/options';
+
 
 export const metadata: Metadata = {
   title: 'Cuddles',
@@ -10,39 +8,17 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({
-  auth,
-  dashboard,
-  add,
-  comments,
-  edit,
-  create
+  children,
 
 }: {
-  auth: React.ReactNode,
-  dashboard: React.ReactNode,
-  add: React.ReactNode,
-  comments: React.ReactNode,
-  edit: React.ReactNode,
-  create: React.ReactNode,
-  
-
+  children: React.ReactNode,
 }) {
-  const session = await getServerSession(authOptions);
-  const isLoggedIn = session ? true : false;
-
 
   return (
     <html lang="en">
         <body>
-          <AuthProvider>
-            { isLoggedIn ? dashboard : auth}
-            {add}
-            {comments}
-            {edit}
-            {create}
-          </AuthProvider>
+          {children}
         </body>
-      
     </html>
   )
 }

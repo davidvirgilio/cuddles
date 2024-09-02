@@ -21,7 +21,7 @@ export default function AuthLayout({
     <>
         <div className={style.frame}>
             <Back />
-            <main>{children}</main>
+            <main className={style.authentication}>{children}</main>
         </div>
         <div className={style.paw}></div>
     </>

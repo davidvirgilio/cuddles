@@ -2,16 +2,15 @@
 
 $cycles: 10turn
 $timeOut: 500ms
-    
+
+
 .profile
     @include var.full
     background: white
     padding: 3rem 4rem
     position: fixed
     top: 0
-    rigth: 0
-    bottom: 0
-    left: 0
+    right: 0
     background-color: white
     animation: slide-in 300ms ease-in-out
 
@@ -22,6 +21,13 @@ $timeOut: 500ms
         img
             @include var.circle
             max-width: 10rem
+
+    .editButton
+        color: #0bf
+        font-size: 1.6rem
+    label
+        @include var.redLabel
+
     form
         input
             border: none
@@ -41,28 +47,23 @@ $timeOut: 500ms
 .rotateBack
     transform: rotate(0deg)
     animation: rotate-back 400ms ease-out
-
-.modalWrapper
-    @include var.modalWrapper
     
-    .modal
-        @include var.simpleModal
-
-        h2
-            padding-block: 1rem
-
-        .modalButton
-            @include var.simpleModalButton
-
-            span
-                text-transform: none
-
-        &:visited, &:link
-            color: #000
-        .modalDelete
-            color: var.$red
-        
-
+@media (min-width: var.$small-breakpoint)
+    
+    .overlay
+        position: fixed
+        background: #0007
+        inset: 0
+        display: flex
+        justify-content: center
+        align-items: center
+    
+    .profile
+        width: var.$small-breakpoint
+        position: static
+        border-radius: 3rem
+        max-height: 90vh
+        overflow: scroll
 
 
 

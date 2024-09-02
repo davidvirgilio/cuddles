@@ -35,7 +35,12 @@ export default function Style(){
             setIsProfile(true);
         }
         
-        setImageUrl(sessionStorage.getItem('image-to-upload') as string);
+        const imageFromSession = sessionStorage.getItem('image-to-upload') as string;
+        if(imageFromSession){
+            setImageUrl(imageFromSession);
+        }else{
+            router.push('/');
+        }
 
         if (imageUrl && !isProfilePicture) {
             getImageAspectRatio(imageUrl).then((originalRatio) => {
@@ -50,7 +55,7 @@ export default function Style(){
         }else{
             setAspectRatio(1/1);
         }
-    },[imageUrl, aspectRatio, isProfilePicture]);
+    },[imageUrl, aspectRatio, isProfilePicture, router]);
 
     useEffect(() => {
         if(ratio === 1){

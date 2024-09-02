@@ -16,8 +16,8 @@
     "mongoose": "^8.0.3",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.0.0-rc-e56f4ae3-20240830",
+    "react-dom": "19.0.0-rc-e56f4ae3-20240830",
     "react-easy-crop": "^5.0.8",
     "sass": "^1.69.5"
   },

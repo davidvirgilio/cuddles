@@ -1,3 +1,5 @@
+@use 'ui/variables' as var
+
 .back
     padding: 1.5rem
 
@@ -12,3 +14,22 @@
     background-position: center
     height: 17rem
     width: 100%
+
+.authentication
+    display: flex
+    flex-direction: column
+    width: 100%
+    gap: 3rem
+    h1
+        max-width: 21rem
+    img
+        height: 14rem
+    button
+        margin-top: 1.5rem
+    form
+        width: 100%
+
+        label
+            color: var.$red
+            text-transform: uppercase
+            font-family: var.$futura

@@ -10,6 +10,7 @@ $gradient: linear-gradient(90deg, #F03 0%, #F60 100%)
 $red: #ED002F
 $orange: #F60
 $theme: #FFF
+$small-breakpoint: 450px
 
 @mixin flex($direction: column)
     display: flex
@@ -47,8 +48,8 @@ $theme: #FFF
 
 @mixin redLabel
     text-transform: uppercase
-    color: var.$red
-    font-family: var.$futura
+    color: $red
+    font-family: $futura
 
 @mixin modalWrapper
     @include flex
@@ -62,6 +63,7 @@ $theme: #FFF
     background: $theme
     border-radius: 1rem
     width: 80%
+    max-width: 40rem
 
 @mixin simpleModalButton
     border-top: 1px solid #ccc
