@@ -17,7 +17,7 @@ const getPosts = async () =>{
 const getUsers = async () =>{
   try{
     const res = await fetch(`${URL}/api/mongodb/users`,{
-      cache: "no-store"
+      // cache: "no-store"
     })
     return res.json();
   }catch(error){
