@@ -3,15 +3,16 @@
 $cycles: 10turn
 $timeOut: 500ms
 
+.overlay
+    @include var.full
+    position: fixed
+    top: 0
+    right: 0
 
 .profile
     @include var.full
     background: white
     padding: 3rem 4rem
-    position: fixed
-    top: 0
-    right: 0
-    background-color: white
     animation: slide-in 300ms ease-in-out
 
 
@@ -51,7 +52,6 @@ $timeOut: 500ms
 @media (min-width: var.$small-breakpoint)
     
     .overlay
-        position: fixed
         background: #0007
         inset: 0
         display: flex
@@ -60,7 +60,6 @@ $timeOut: 500ms
     
     .profile
         width: var.$small-breakpoint
-        position: static
         border-radius: 3rem
         max-height: 90vh
         overflow: scroll
