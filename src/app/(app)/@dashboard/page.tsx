@@ -4,8 +4,8 @@ const URL = process.env.NEXTAUTH_URL;
 
 const getPosts = async () =>{
   try{
-    const res = await fetch(`${URL}/api/mongodb/posts`,{
-      cache: "no-store"
+    const res = await fetch(`${URL}/api/mongodb/posts/`,{
+      // cache: "no-store"
     })
     return res.json();
   }catch(error){
