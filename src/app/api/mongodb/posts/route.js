@@ -16,7 +16,7 @@ export async function POST(req){
 
 export async function GET(){
     try{
-        const posts = await Post.find();
+        const posts = await Post.find().exec();
         return NextResponse.json({posts},{status:200});
     }catch(error){
         return NextResponse.json({message: "Error", error},{status:500});
