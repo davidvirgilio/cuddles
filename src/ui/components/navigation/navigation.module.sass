@@ -1,5 +1,7 @@
+@use 'ui/variables' as var
+
 .navBar
-    position: sticky
+    position: fixed
     bottom: 0
     flex-shrink: 0
     background: white
@@ -19,5 +21,21 @@
         .iconAdd
             width: 6rem
             height: auto
-.hidden
-    display: none
+
+@media (min-width: var.$dashboard-max-width + 280)
+    .navBar
+        left: 0
+        top: 0
+        width: fit-content
+
+        ul
+            flex-direction: column
+            height: 100vh
+            justify-content: space-evenly
+
+            li
+                padding-block: 3rem
+
+                a, label
+                    height: 100%
+                

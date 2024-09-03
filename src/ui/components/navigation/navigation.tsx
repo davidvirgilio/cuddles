@@ -49,18 +49,10 @@ export default function Navbar(){
                         <input
                             type="file"
                             accept="image/*"
-                            className={style.hidden}
+                            style={{display: 'none'}}
                             onChange={handleChange}
                         />
                     </label>
-                    {/* <Link href="/add" scroll={false}>
-                        <Image
-                            className={style.iconAdd}
-                            alt="Add a new post"
-                            src='/assets/icon-add.svg'
-                            width={81}
-                            height={80}/>
-                    </Link> */}
                 </li>
 
                 <li>
