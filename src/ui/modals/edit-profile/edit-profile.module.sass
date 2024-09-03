@@ -9,31 +9,31 @@ $timeOut: 500ms
     top: 0
     right: 0
 
-.profile
-    @include var.full
-    background: white
-    padding: 3rem 4rem
-    animation: slide-in 300ms ease-in-out
+    .profile
+        @include var.full
+        background: white
+        padding: 3rem 4rem
+        animation: slide-in 300ms ease-in-out
 
 
-    .profilePic
-        @include var.flex
-        gap: 1rem
-        img
-            @include var.circle
-            max-width: 10rem
+        .profilePic
+            @include var.flex
+            gap: 1rem
+            img
+                @include var.circle
+                max-width: 10rem
 
-    .editButton
-        color: #0bf
-        font-size: 1.6rem
-    label
-        @include var.redLabel
+        .editButton
+            color: #0bf
+            font-size: 1.6rem
+        label
+            @include var.redLabel
 
-    form
-        input
-            border: none
-            border-radius: 0
-            border-bottom: 0.1rem solid var.$orange
+        form
+            input
+                border: none
+                border-radius: 0
+                border-bottom: 0.1rem solid var.$orange
 
 .close
     animation: slide-out $timeOut ease-in-out

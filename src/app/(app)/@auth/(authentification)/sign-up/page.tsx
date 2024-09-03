@@ -1,4 +1,4 @@
-import SignUp from "@/ui/pages/authentication.tsx/sign-up"
+import SignUp from "@/ui/pages/authentication/sign-up"
 
 export default function Page(){
     return <SignUp/>

@@ -1,4 +1,4 @@
-import Auth from "@/ui/pages/authentication.tsx/authentication"
+import Auth from "@/ui/pages/authentication/authentication"
 
 export default function Page() {
   return <Auth/>

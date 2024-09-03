@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import BackButton from "@/ui/components/back-button";
 import S3Image from "@/ui/components/image-from-s3-bucket";
 import urlToImage from "@/lib/name-image";
+import revalidate from "./revalidate-test";
 
 export default function Details(){
 
@@ -89,10 +90,10 @@ export default function Details(){
             setUploading(false);
         }
         
-        router.replace('/')
-        router.refresh()
-        sessionStorage.removeItem('image-to-upload');
-        sessionStorage.removeItem('image-cropped');
+        revalidate();
+        router.replace('/');
+        router.refresh();
+        sessionStorage.clear();
 
     }
 

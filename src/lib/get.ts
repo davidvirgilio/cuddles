@@ -1,6 +1,14 @@
-import { NextResponse } from "next/server";
+/*
+* Name: Get functions
+* Description: This file contains functions that are used to get data from the database.
+*/
 
-const URL = process.env.NEXTAUTH_URL;
+
+"use server"
+
+const URL = process.env.NEXTAUTH_URL; // Deployed domain
+
+
 
 export async function getPostById(postId: string){
     try{
@@ -18,4 +26,43 @@ export async function getPostById(postId: string){
         console.error(error);
         throw error
     }
+}
+
+/** 
+ * It fetches an array with all the posts on the database. 
+*/
+export async function getPosts(){
+        const response = await fetch(`${URL}/api/mongodb/posts/`,{
+            cache: "no-store",
+            next: {
+                tags: ['posts']
+            }
+        })
+        return await response.json();
+}
+
+/** 
+ * It fetches an array with all the users on the database. 
+*/
+export async function getUsers(){
+      const res = await fetch(`${URL}/api/mongodb/users`,{
+      })
+      return res.json();
+  }
+
+export async function getUser(user:any){
+        const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
+            cache: "no-store" //still I need to identify what to do with this.
+        });
+        
+        return res.json();
+}
+
+
+export async function getUserPosts(userId:any){
+
+    const res = await fetch(`${URL}/api/mongodb/posts/${userId}`,{
+        cache: "no-store"
+    })
+    return res.json();
 }

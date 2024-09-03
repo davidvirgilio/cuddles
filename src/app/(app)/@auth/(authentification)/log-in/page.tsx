@@ -1,4 +1,4 @@
-import Login from "@/ui/pages/authentication.tsx/login"
+import Login from "@/ui/pages/authentication/login"
 
 export default function Page(){
     return <Login />

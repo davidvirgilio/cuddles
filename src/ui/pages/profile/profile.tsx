@@ -1,5 +1,4 @@
 import Post from "@/ui/components/show-posts/show-posts";
-import { Icon } from "@/ui/components/logos/logo-versions"
 import SignOut from "@/ui/components/sign-out-button";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
@@ -7,41 +6,11 @@ import FollowButton from "@/ui/components/follow-button";
 import Link from "next/link";
 import S3Image from "@/ui/components/image-from-s3-bucket";
 import { notFound } from "next/navigation";
+import { getUser, getUserPosts } from "@/lib/get";
 
 // Stylesheet:
 import style from "./profile.module.sass"
 
-const URL = process.env.NEXTAUTH_URL;
-
-
-const getUser = async (user:any) =>{
-    try{
-        const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
-            cache: "no-store"
-        });
-        
-        if (!res.ok) {
-            throw new Error('Failed to get user information');
-        }
-        return res.json();
-        
-    }catch(error){
-        console.log("failed to get user", error);
-        throw error;
-    }
-}
-
-const getPosts = async (userId:any) =>{
-    try{
-        const res = await fetch(`${URL}/api/mongodb/posts/${userId}`,{
-            cache: "no-store"
-        })
-        return res.json();
-    }catch(error){
-        console.log("failed to get user's posts", error)
-        
-    }
-}
 export default async function Profile({params}:{params: {user: string}}){ 
 
     const session = await getServerSession(authOptions);
@@ -59,7 +28,7 @@ export default async function Profile({params}:{params: {user: string}}){
     
     if(user){
         const userId = user._id;
-        const {posts} = await getPosts(userId);
+        const {posts} = await getUserPosts(userId);
         const name = user.name;
         const followers = user.followers;
         const following = user.following;

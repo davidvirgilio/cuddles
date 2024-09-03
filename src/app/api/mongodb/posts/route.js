@@ -1,5 +1,5 @@
-import Post from "@/app/(models)/posts";
 import { NextResponse } from "next/server";
+import Post from "@/app/(models)/posts";
 
 export async function POST(req){
     try{
