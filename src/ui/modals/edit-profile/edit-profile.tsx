@@ -27,14 +27,14 @@ export default function EditProfile(){
 
     return(
     <>
-            <div className={style.profilePic}>
-                <Image alt={`${username}'s picture`} src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={100} height={100}/>
-                <button className={style.editButton} onClick={()=>{setDisplayModal(true)}}>Edit profile picture</button>
-            </div>
-            <EditProfileForm currentUserData={profileData} userId={userId} />
-            {
-                displayModal && <Alert sendClose={()=>setDisplayModal(false)}/>
-            }
+        <div className={style.profilePic}>
+            <Image alt={`${username}'s picture`} src={`https://s3.eu-west-3.amazonaws.com/cuddles.storage/${image}`} width={100} height={100}/>
+            <button className={style.editButton} onClick={()=>{setDisplayModal(true)}}>Edit profile picture</button>
+        </div>
+        <EditProfileForm currentUserData={profileData} userId={userId} />
+        {
+            displayModal && <Alert sendClose={()=>setDisplayModal(false)}/>
+        }
     </>
     )
 }
