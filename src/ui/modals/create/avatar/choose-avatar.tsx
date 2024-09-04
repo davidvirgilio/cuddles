@@ -68,9 +68,9 @@ export default function ChooseAvatar(){
                 <h1>Choose an Avatar</h1>
                 <form onChange={handleRadioChange} className={style.form}>
                     <label>
-                        <Image 
+                        <S3Image 
                             alt='Green Budgie' 
-                            src={'/images/avatar1.jpg'} 
+                            src={'avatar1.jpg'} 
                             width={640} 
                             height={960}
                             onClick={handleClick}
@@ -83,9 +83,9 @@ export default function ChooseAvatar(){
                         />
                     </label>
                     <label>
-                        <Image 
+                        <S3Image 
                             alt='Black dog' 
-                            src={'/images/avatar2.jpg'} 
+                            src={'avatar2.jpg'} 
                             width={640} 
                             height={886}
                             onClick={handleClick}
@@ -98,9 +98,9 @@ export default function ChooseAvatar(){
                         />
                     </label>
                     <label>
-                        <Image 
+                        <S3Image 
                             alt='White kitten' 
-                            src={'/images/avatar3.jpg'} 
+                            src={'avatar3.jpg'} 
                             width={640} 
                             height={669}
                             onClick={handleClick}

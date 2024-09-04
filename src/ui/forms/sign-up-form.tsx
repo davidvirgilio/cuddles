@@ -87,8 +87,8 @@ export default function SignUpForm(){
                 throw new Error('Failed to create user');
             }
 
-
             router.replace("/create/avatar", {scroll: false});
+            router.refresh();
 
 
         }catch(error){

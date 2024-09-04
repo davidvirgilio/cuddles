@@ -8,6 +8,7 @@ export default function S3Image<children>(
         height,
         className,
         priority,
+        onClick,
     }:{
         src: string,
         alt: string,
@@ -15,6 +16,7 @@ export default function S3Image<children>(
         height?: number,
         className?: string,
         priority?: boolean,
+        onClick?: (e:any) => void,
     }
 ){
     const URL = 'https://s3.eu-west-3.amazonaws.com/cuddles.storage'
@@ -26,5 +28,6 @@ export default function S3Image<children>(
         width={width}
         height={height}
         priority={priority}
+        onClick={onClick}
     />);
 }
