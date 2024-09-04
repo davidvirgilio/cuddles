@@ -22,17 +22,17 @@ import Link from "next/link";
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { notFound } from "next/navigation";
-import { getUser, getUserPosts } from "@/lib/get";
+import { getUser, getUserPosts, getUsers } from "@/lib/get";
 
 export const revalidate = 60;
 
-// export async function generateStaticParams() {
-//     const posts = await fetch('https://.../posts').then((res) => res.json())
+export async function generateStaticParams() {
+    const users = getUsers() as any;
    
-//     return posts.map((post) => ({
-//       slug: post.slug,
-//     }))
-//   }
+    return users.map((user: any) => ({
+      username: user.username,
+    }))
+  }
 
 // An asynchronous function allows certain operations to be executed without blocking the main thread, enabling the program to continue running other tasks while waiting for a long-running operation to complete.
 export default async function Profile({params}:{params: {username: string}}){ 
