@@ -1,7 +1,7 @@
 @use 'ui/variables' as var
 
 .navBar
-    position: fixed
+    position: sticky
     bottom: 0
     flex-shrink: 0
     background: white
@@ -24,6 +24,7 @@
 
 @media (min-width: var.$dashboard-max-width + 280)
     .navBar
+        position: fixed
         left: 0
         top: 0
         width: fit-content

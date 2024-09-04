@@ -51,9 +51,10 @@ export async function getUsers(){
 
 export async function getUser(username:any){
         const res = await fetch(`${URL}/api/mongodb/users/${username}`,{
-            cache: "no-store" //still I need to identify what to do with this.
+            next: {
+                tags: ['posts'],
+            }
         });
-        
         return res.json();
 }
 

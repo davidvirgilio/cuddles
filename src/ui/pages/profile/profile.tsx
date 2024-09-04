@@ -41,7 +41,8 @@ export default async function Profile({params}:{params: {username: string}}){
     const session = await getServerSession(authOptions); // Session data for server components
 
     // Define user data based on session
-    const isCurrentUser = session?.user.email === params.username ; 
+    const isCurrentUser = session?.user.username === params.username ; 
+    console.log(isCurrentUser)
     const sessionUserId = session?.user?.id;
     
     // Read the username from the current route to get dynamic behavior.
