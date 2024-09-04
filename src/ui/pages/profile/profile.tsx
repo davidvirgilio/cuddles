@@ -27,7 +27,7 @@ import { getUser, getUserPosts, getUsers } from "@/lib/get";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-    const users = getUsers() as any;
+    const {users} = await getUsers() as any;
    
     return users.map((user: any) => ({
       username: user.username,
@@ -37,12 +37,14 @@ export async function generateStaticParams() {
 // An asynchronous function allows certain operations to be executed without blocking the main thread, enabling the program to continue running other tasks while waiting for a long-running operation to complete.
 export default async function Profile({params}:{params: {username: string}}){ 
 
-    // Get the user session from NextAuth and defining related constants.
+    // Get the user session from NextAuth.
     const session = await getServerSession(authOptions); // Session data for server components
-    const sessionEmail = session?.user?.email;
+
+    // Define user data based on session
+    const isCurrentUser = session?.user.email === params.username ; 
     const sessionUserId = session?.user?.id;
     
-    // Reading the username from the current route to get dynamic behavior.
+    // Read the username from the current route to get dynamic behavior.
     const username = params.username;
     
     // It fetches the user posts array
@@ -52,8 +54,7 @@ export default async function Profile({params}:{params: {username: string}}){
     if(userData){
 
 
-        // Defining the variables from teh db.
-        const profile = userData?.email == sessionEmail ? true : false; 
+        // Defining the variables from the db.
         const userId = userData._id;
         const name = userData.name;
         const followers = userData.followers;
@@ -79,7 +80,7 @@ export default async function Profile({params}:{params: {username: string}}){
 
                         <div className={    style.heading   }>
                             <h1>{   name   }</h1>
-                            { profile &&  <Link href={`/edit-profile/`} scroll={false}> ... </Link> }
+                            { isCurrentUser &&  <Link href={`/edit-profile/`} scroll={false}> ... </Link> }
                         </div>
 
                         <div className={    style.rowInfo   }>
@@ -102,7 +103,7 @@ export default async function Profile({params}:{params: {username: string}}){
                         </div>
 
                         <div className={    style.rowInfo   }>
-                            { profile ?
+                            { isCurrentUser ?
                                     <SignOut />
                                     :
                                     <FollowButton
@@ -118,7 +119,7 @@ export default async function Profile({params}:{params: {username: string}}){
                 <Post 
                     posts={  posts } 
                     users={[   userData   ]} 
-                    isProfile={ profile  }
+                    isProfile={ isCurrentUser  }
                 />
             </>
 
