@@ -33,7 +33,6 @@ export async function getPostById(postId: string){
 */
 export async function getPosts(){
         const response = await fetch(`${URL}/api/mongodb/posts/`,{
-            cache: "no-store",
             next: {
                 tags: ['posts']
             }
@@ -50,8 +49,8 @@ export async function getUsers(){
       return res.json();
   }
 
-export async function getUser(user:any){
-        const res = await fetch(`${URL}/api/mongodb/users/${user}`,{
+export async function getUser(username:any){
+        const res = await fetch(`${URL}/api/mongodb/users/${username}`,{
             cache: "no-store" //still I need to identify what to do with this.
         });
         
