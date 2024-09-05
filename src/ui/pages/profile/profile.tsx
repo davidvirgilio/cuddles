@@ -120,7 +120,6 @@ export default async function Profile({params}:{params: {username: string}}){
 
                 <Post 
                     posts={  posts } 
-                    users={[   userData   ]} 
                     isProfile={ isCurrentUser  }
                 />
             </>
