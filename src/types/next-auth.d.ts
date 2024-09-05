@@ -1,5 +1,6 @@
 import NextAuth, { DefaultSession } from "next-auth"
 import { JWT, DefaultJWT } from "next-auth/jwt"
+import { ObjectId } from "mongodb"
 
 declare module "next-auth" {
   /**

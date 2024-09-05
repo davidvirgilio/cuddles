@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import Post from "@/app/(models)/posts";
+import Post from "@/models/posts";
+import User from "@/models/users";
 
 export async function POST(req){
     try{
@@ -16,7 +17,8 @@ export async function POST(req){
 
 export async function GET(){
     try{
-        const posts = await Post.find().exec();
+        // const posts = await Post.find().exec();
+        const posts = await Post.find().populate('user_id', 'username profile_pic', User);
         return NextResponse.json({posts},{status:200});
     }catch(error){
         return NextResponse.json({message: "Error", error},{status:500});

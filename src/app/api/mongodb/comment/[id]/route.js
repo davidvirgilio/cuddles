@@ -1,4 +1,4 @@
-import Post from "@/app/(models)/posts";
+import Post from "@/models/posts";
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }){

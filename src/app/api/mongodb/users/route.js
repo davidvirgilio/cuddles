@@ -1,4 +1,4 @@
-import User from "@/app/(models)/users";
+import User from "@/models/users";
 import { NextResponse } from "next/server";
 
 export async function POST(req){
@@ -14,6 +14,8 @@ export async function POST(req){
     }
 }
 
+
+// No longer using this
 export async function GET(){
     try{
         const users = await User.find();

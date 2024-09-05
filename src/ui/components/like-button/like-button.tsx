@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect} from "react";
 import style from "./like-button.module.sass"
+import { ObjectId } from "mongodb";
 
-export default function Like({postId, userId, initialLikes}:{postId: string, userId: any, initialLikes: string[]}){
+export default function Like({postId, userId, initialLikes}:{postId: ObjectId, userId: any, initialLikes: string[]}){
 
     const [likes, setLikes] = useState(initialLikes || []);
     const [hasLiked, setHasLiked] = useState(false);

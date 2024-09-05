@@ -1,4 +1,4 @@
-import User from "@/app/(models)/users";
+import User from "@/models/users";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req, {params}) {

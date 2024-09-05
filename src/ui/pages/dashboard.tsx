@@ -12,16 +12,13 @@
 import Post from "@/ui/components/show-posts/show-posts";
 import { getPosts, getUsers } from "@/lib/get";
 
-// Cache revalidation time in seconds. Next will invalidate the cache in 60 seconds.
-export const revalidate = 60
-
 // Dashboard page
 export default async function Dashboard() {
   
   // Data fetching on server to send as props on the Post component
   let {posts} = await getPosts();
-  let {users} = await getUsers();
 
   // It renders the posts component.
-  return <Post posts={posts} users={users}/>
+  return <Post posts={posts}
+  />
 }

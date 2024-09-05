@@ -4,8 +4,9 @@ import Link from "next/link";
 import deleteS3Image from "@/lib/delete-s3-image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { ObjectId } from "mongodb";
 
-export default function PostOptions({postId, postImage, sendClose}:{postId: string, postImage: string, sendClose: (close: boolean) => void}){
+export default function PostOptions({postId, postImage, sendClose}:{postId: ObjectId, postImage: string, sendClose: (close: boolean) => void}){
     document.body.style.overflow = 'hidden';
     const router = useRouter()
 

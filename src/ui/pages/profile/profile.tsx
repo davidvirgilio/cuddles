@@ -26,6 +26,8 @@ import { getUser, getUserPosts, getUsers } from "@/lib/get";
 
 export const revalidate = 60;
 
+// export const dynamicParams = true
+
 export async function generateStaticParams() {
     const {users} = await getUsers() as any;
    
@@ -42,7 +44,6 @@ export default async function Profile({params}:{params: {username: string}}){
 
     // Define user data based on session
     const isCurrentUser = session?.user.username === params.username ; 
-    console.log(isCurrentUser)
     const sessionUserId = session?.user?.id;
     
     // Read the username from the current route to get dynamic behavior.

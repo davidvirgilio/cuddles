@@ -3,9 +3,9 @@
 * Description: This file contains functions that are used to get data from the database.
 */
 
-
 "use server"
 
+import { user } from "@/types/users";
 const URL = process.env.NEXTAUTH_URL; // Deployed domain
 
 
@@ -34,11 +34,13 @@ export async function getPostById(postId: string){
 export async function getPosts(){
         const response = await fetch(`${URL}/api/mongodb/posts/`,{
             next: {
-                tags: ['posts']
-            }
+                tags: ['posts'],
+                revalidate: 60,
+            },
         })
-        return await response.json();
+        return response.json();
 }
+
 
 /** 
  * It fetches an array with all the users on the database. 
@@ -48,6 +50,7 @@ export async function getUsers(){
       })
       return res.json();
   }
+
 
 export async function getUser(username:any){
         const res = await fetch(`${URL}/api/mongodb/users/${username}`,{
@@ -65,4 +68,11 @@ export async function getUserPosts(userId:any){
         cache: "no-store"
     })
     return res.json();
+}
+
+export async function getUserById(userId: string){
+    const res = await fetch(`${URL}/api/mongodb/users/id/${userId}`,{
+    })
+    // console.log(await res.json())
+    return await res.json();
 }
