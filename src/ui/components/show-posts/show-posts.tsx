@@ -23,21 +23,21 @@ export default function Posts({ initialPosts, isProfile = false}: PostsProps ){
 
     
     
-    const loadMorePosts = async()=>{
-        let morePosts = { posts };
-        if(isProfile){
-            morePosts = await getUserPosts(userId, offset, numberOfPostsToFetch);
-        }else{
-            morePosts = await getPosts(offset, numberOfPostsToFetch);
-        }
-        setPosts( [ ...posts ,  ...morePosts.posts ] );
-        setOffset( offset + numberOfPostsToFetch )
-    }
     useEffect(() => {
+        const loadMorePosts = async()=>{
+            let morePosts = { posts };
+            if(isProfile){
+                morePosts = await getUserPosts(userId, offset, numberOfPostsToFetch);
+            }else{
+                morePosts = await getPosts(offset, numberOfPostsToFetch);
+            }
+            setPosts( [ ...posts ,  ...morePosts.posts ] );
+            setOffset( offset + numberOfPostsToFetch )
+        }
         if (inView) {
           loadMorePosts()
         }
-      }, [inView, loadMorePosts])
+      }, [inView])
 
     return(
         <div>
