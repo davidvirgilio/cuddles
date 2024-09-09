@@ -37,7 +37,7 @@ export default function Posts({ initialPosts, isProfile = false}: PostsProps ){
         if (inView) {
           loadMorePosts()
         }
-      }, [inView])
+      }, [inView, loadMorePosts])
 
     return(
         <div>
