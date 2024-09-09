@@ -12,13 +12,15 @@
 import Posts from "@/ui/components/show-posts/show-posts";
 import { getPosts } from "@/lib/get";
 
+const initialNumberOfPosts = 5;
+
 // Dashboard page
 export default async function Dashboard() {
   
   // Data fetching on server to send as props on the Post component
-  let { posts } = await getPosts();
+  let { posts } = await getPosts(0, initialNumberOfPosts);
  
   // It renders the posts component.
-  return <Posts posts={posts}
+  return <Posts initialPosts={posts}
   />
 }

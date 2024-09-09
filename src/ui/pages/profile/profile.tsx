@@ -65,7 +65,7 @@ export default async function Profile({params}:{params: {username: string}}){
         const profilePhoto = userData.profile_pic;
 
         // Fetching user's post array.
-        const {posts} = await getUserPosts(userId);
+        const { posts} = await getUserPosts(userId);
 
         return (
             <>
@@ -120,7 +120,7 @@ export default async function Profile({params}:{params: {username: string}}){
                 </div>
 
                 <Post 
-                    posts={  posts } 
+                    initialPosts={  posts } 
                     isProfile={ isCurrentUser  }
                 />
             </>

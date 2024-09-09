@@ -30,8 +30,8 @@ export async function getPostById(postId: string){
 /** 
  * It fetches an array with all the posts on the database. 
 */
-export async function getPosts(){
-        const response = await fetch(`${URL}/api/mongodb/posts/`,{
+export async function getPosts( offset = 0, limit = 10 ){
+        const response = await fetch(`${URL}/api/mongodb/posts?offset=${offset}&limit=${limit}`,{
             next: {
                 tags: ['posts'],
                 revalidate: 60,
@@ -61,9 +61,9 @@ export async function getUser(username:any){
 }
 
 
-export async function getUserPosts(userId:any){
+export async function getUserPosts(userId:any, offset= 0, limit= 5){
 
-    const res = await fetch(`${URL}/api/mongodb/posts/${userId}`,{
+    const res = await fetch(`${URL}/api/mongodb/posts/${userId}?offset=${offset}&limit=${limit}`,{
         cache: "no-store"
     })
     return res.json();
