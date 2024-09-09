@@ -9,16 +9,16 @@
  */
 
 
-import Post from "@/ui/components/show-posts/show-posts";
-import { getPosts, getUsers } from "@/lib/get";
+import Posts from "@/ui/components/show-posts/show-posts";
+import { getPosts } from "@/lib/get";
 
 // Dashboard page
 export default async function Dashboard() {
   
   // Data fetching on server to send as props on the Post component
-  let {posts} = await getPosts();
-
+  let { posts } = await getPosts();
+ 
   // It renders the posts component.
-  return <Post posts={posts}
+  return <Posts posts={posts}
   />
 }

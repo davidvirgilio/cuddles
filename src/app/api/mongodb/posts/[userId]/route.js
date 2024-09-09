@@ -4,8 +4,8 @@ import User from "@/models/users";
 
 export async function GET(request ,{params}){
     try{
-        const user = params.user
-        const posts = await Post.find({user_id: user}).populate('user_id','username profile_pic', User).exec();
+        const userId = params.userId
+        const posts = await Post.find({user_id: userId}).populate('user_id','username profile_pic', User).sort('-createdAt').exec();
         return NextResponse.json({posts},{status:200});
         
     }catch(error){

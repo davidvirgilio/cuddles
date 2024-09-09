@@ -29,7 +29,7 @@ export const revalidate = 60;
 // export const dynamicParams = true
 
 export async function generateStaticParams() {
-    const {users} = await getUsers() as any;
+    const { users } = await getUsers() as any;
    
     return users.map((user: any) => ({
       username: user.username,
@@ -41,16 +41,17 @@ export default async function Profile({params}:{params: {username: string}}){
 
     // Get the user session from NextAuth.
     const session = await getServerSession(authOptions); // Session data for server components
-
-    // Define user data based on session
-    const isCurrentUser = session?.user.username === params.username ; 
-    const sessionUserId = session?.user?.id;
     
     // Read the username from the current route to get dynamic behavior.
-    const username = params.username;
+    const { username } = params;
+
+    // Define user data based on session
+    const isCurrentUser = session?.user.username === username ; 
+    const currentUserId = session?.user?.id;
+    
     
     // It fetches the user posts array
-    const {userData} = await getUser(username);
+    const { userData } = await getUser( username );
     
     // Condition to render the page if the user is found in the database or returns a 404 page.
     if(userData){
@@ -69,7 +70,7 @@ export default async function Profile({params}:{params: {username: string}}){
         return (
             <>
             
-                <div className={    style.header    }>
+                <div className={ style.header }>
 
                     <S3Image
                         src={  profilePhoto  } 
@@ -110,7 +111,7 @@ export default async function Profile({params}:{params: {username: string}}){
                                     :
                                     <FollowButton
                                         toFollowId={    userId  }
-                                        followerId={    sessionUserId   }
+                                        followerId={    currentUserId   }
                                         initialFollowersArray={ followers    }
                                     />
                             }

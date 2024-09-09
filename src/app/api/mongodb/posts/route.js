@@ -17,8 +17,9 @@ export async function POST(req){
 
 export async function GET(){
     try{
-        // const posts = await Post.find().exec();
-        const posts = await Post.find().populate('user_id', 'username profile_pic', User);
+        // const posts = await Post.find().exec(); 
+        // The query asks for the whole array with username and profile_pic populated form the poster ID.
+        const posts = await Post.find().populate('user_id', 'username profile_pic', User).sort('-createdAt').exec();
         return NextResponse.json({posts},{status:200});
     }catch(error){
         return NextResponse.json({message: "Error", error},{status:500});

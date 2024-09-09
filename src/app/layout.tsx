@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.sass';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 
 export const metadata: Metadata = {
@@ -17,7 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
         <body>
-          {children}
+            { children }
         </body>
     </html>
   )

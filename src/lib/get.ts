@@ -5,7 +5,6 @@
 
 "use server"
 
-import { user } from "@/types/users";
 const URL = process.env.NEXTAUTH_URL; // Deployed domain
 
 
