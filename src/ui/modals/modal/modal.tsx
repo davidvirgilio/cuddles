@@ -1,5 +1,6 @@
 import style from "./modal.module.sass"
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react";
 
 export default function Modal(
     {
@@ -10,8 +11,26 @@ export default function Modal(
         children: React.ReactNode
     }){
     
+    const [clickedOutside, setClickedOutside] = useState(false);
     const router = useRouter();
-    const handleClose = () => { router.back();  };
+    const handleClose = () => { 
+        router.back();
+
+      };
+    
+    
+    useEffect(()=>{
+        const clickOutside = (e: MouseEvent)=>{
+            const modal = document.querySelector('.'+ style.wrapper);
+            if(modal && !modal.contains(e.target as Node) && !clickedOutside){
+                console.log('Back')
+                router.back();
+                setClickedOutside(true);
+                window.removeEventListener('mouseup', clickOutside)
+            }
+        }
+        window.addEventListener('mouseup', clickOutside);
+    },[router, clickedOutside])
 
     return (
         <div className={style.overlay}>
