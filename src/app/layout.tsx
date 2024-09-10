@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.sass';
-import { Suspense } from 'react';
-import Loading from './loading';
+import GoogleAnalytics from '@/ui/google/google-analytics';
 
 
 export const metadata: Metadata = {
@@ -18,6 +17,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+        <GoogleAnalytics/>
         <body>
             { children }
         </body>
