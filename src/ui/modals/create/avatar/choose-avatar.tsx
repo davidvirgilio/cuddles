@@ -36,7 +36,7 @@ export default function ChooseAvatar(){
         }
     }
 
-    const handleClose = ()=>{
+    const handleClose = async()=>{
         router.push("/")
         document.body.style.overflow = '';
         router.refresh()
@@ -57,8 +57,7 @@ export default function ChooseAvatar(){
         }
 
         await update({profile_pic: avatar});
-        document.body.style.overflow = '';
-        handleClose()
+        await handleClose()
         
     };
 
