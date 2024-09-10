@@ -101,6 +101,7 @@ export default function SignUpForm(){
                 }
     
                 router.replace("/create/avatar", {scroll: false});
+                document.body.style.overflow = 'hidden';
                 router.refresh();
 
             }else{

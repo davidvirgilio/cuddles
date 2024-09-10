@@ -40,12 +40,6 @@ export const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async redirect({ url, baseUrl}){
-
-            // if(url === '/sign-up'){
-            // //     return `/create/avatar`
-            // // }
-            // console.log('URL',url)
-            // console.log('BASE',baseUrl)
             
             return baseUrl
         },

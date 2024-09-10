@@ -15,8 +15,6 @@ export default function ChooseAvatar(){
     const userId = session?.user.id as string;
     const router = useRouter();
 
-    document.body.style.overflow = 'hidden';
-
     const handleClick = (event:any)=>{
         document.querySelector(`.${style.clicked}`)?.classList.remove(style.clicked);
         event.target.classList.add(style.clicked);
@@ -36,7 +34,7 @@ export default function ChooseAvatar(){
         }
     }
 
-    const handleClose = async()=>{
+    const handleClose = ()=>{
         router.push("/")
         document.body.style.overflow = '';
         router.refresh()
@@ -45,19 +43,24 @@ export default function ChooseAvatar(){
     const handleSave = async()=>{
         const newAvatar = { profile_pic:  avatar };
         try{
-            await fetch(`../api/mongodb/users/${userId}`, {
+            const res = await fetch(`../api/mongodb/users/${userId}`, {
                 method:"PATCH",
                 body: JSON.stringify(newAvatar),
                 headers:{
                     "Content-type": "application/json"
                 }
             })
+
+            if(!res.ok){
+                throw new Error("Failed to update avatar in the database.");
+            }
+            await update({profile_pic: avatar});
+            handleClose()
+
         }catch(error){
             console.log("Error updating database:", error);
         }
-
-        await update({profile_pic: avatar});
-        await handleClose()
+        
         
     };
 

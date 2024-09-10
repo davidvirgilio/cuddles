@@ -11,6 +11,7 @@
 
 import Posts from "@/ui/components/show-posts/show-posts";
 import { getPosts } from "@/lib/get";
+import Link from "next/link";
 
 const initialNumberOfPosts = 5;
 

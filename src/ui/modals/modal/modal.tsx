@@ -15,8 +15,8 @@ export default function Modal(
     const router = useRouter();
     const handleClose = () => { 
         router.back();
-
       };
+
     
     
     useEffect(()=>{
