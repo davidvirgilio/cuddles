@@ -2,6 +2,7 @@ import { NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/users";
 import bcrypt from "bcryptjs"
+import { redirect } from "next/dist/server/api-utils";
 
 
 
@@ -38,6 +39,16 @@ export const authOptions: NextAuthOptions = {
         signOut: '/'
     },
     callbacks: {
+        async redirect({ url, baseUrl}){
+
+            // if(url === '/sign-up'){
+            // //     return `/create/avatar`
+            // // }
+            // console.log('URL',url)
+            // console.log('BASE',baseUrl)
+            
+            return baseUrl
+        },
         async jwt({ token, trigger, session, user }) {
             if (user) {
                 token.id = user.id;  // Store user ID in JWT token

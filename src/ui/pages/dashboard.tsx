@@ -21,6 +21,5 @@ export default async function Dashboard() {
   let { posts } = await getPosts(0, initialNumberOfPosts);
  
   // It renders the posts component.
-  return <Posts initialPosts={posts}
-  />
+  return <Posts initialPosts={posts}/>
 }

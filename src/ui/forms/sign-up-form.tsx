@@ -12,6 +12,7 @@ export default function SignUpForm(){
         username: "",
         name: "",
         password: "",
+        confirmPassword: "",
         email: "",
         profile_pic: "avatar1.jpg",
         followers: [],
@@ -39,6 +40,7 @@ export default function SignUpForm(){
             ...prevState,
             [name]: value,
         }));
+
     };
 
 
@@ -62,42 +64,49 @@ export default function SignUpForm(){
                 body: JSON.stringify( {email} ),
             });
 
-            const {user} = await resUserExists.json();
+            const { user } = await resUserExists.json();
             if(user){
                 setError("This user already exists.");
                 return;
             }
 
-            const hashedPassword:string = await hashPassword(formData.password);
+            if(formData.password === formData.confirmPassword){
 
-            const updatedFormData = {
-                ...formData,
-                password: hashedPassword,
-            };
+                const hashedPassword:string = await hashPassword(formData.password);
 
-            const res = await fetch("/api/mongodb/users", {
-                method:"POST",
-                body: JSON.stringify({updatedFormData}),
-                headers:{
-                    "Content-type": "application/json"
-                },
-            });
+                const {confirmPassword, ...updatedFormData} = {
+                    ...formData,
+                    password: hashedPassword,
+                };
 
-            if(res.ok){
-                const form = e.target;
-                form.reset();
-
-                await signIn('credentials',{
-                    email,
-                    password: formData.password,
-                    redirect: false
+                const res = await fetch("/api/mongodb/users", {
+                    method:"POST",
+                    body: JSON.stringify({updatedFormData}),
+                    headers:{
+                        "Content-type": "application/json"
+                    },
                 });
-            }else{
-                throw new Error('Failed to create user');
-            }
+                if(res.ok){
+                    const form = e.target;
+                    form.reset();
+    
+                    await signIn('credentials',{
+                        email,
+                        password: formData.password,
+                        redirect: false
+                    });
 
-            router.replace("/create/avatar", {scroll: false});
-            router.refresh();
+                }else{
+                    throw new Error('Failed to create user');
+                }
+    
+                router.replace("/create/avatar", {scroll: false});
+                router.refresh();
+
+            }else{
+                setError("Passwords do not match.");
+                return;
+            }
 
 
         }catch(error){
@@ -160,8 +169,20 @@ export default function SignUpForm(){
                         value={formData.password}
                     />
                 </div>
+                <div>
+                    <label htmlFor="confirmPassword">confirm password:</label>
+                    <input
+                        onChange={handleChange}
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="•••••••••"
+                        required={true}
+                        value={formData.confirmPassword}
+                    />
+                </div>
                 {error && (
-                    <span>{error}</span>
+                    <span style={{color:'red'}}>{error}</span>
                 )}
 
                 <button className="btn" type="submit">Create account</button>

@@ -1,7 +1,5 @@
 'use client'
 import style from './choose-avatar.module.sass'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
@@ -39,8 +37,8 @@ export default function ChooseAvatar(){
     }
 
     const handleClose = ()=>{
-        document.body.style.overflow = '';
         router.push("/")
+        document.body.style.overflow = '';
         router.refresh()
     }
 
@@ -59,6 +57,7 @@ export default function ChooseAvatar(){
         }
 
         await update({profile_pic: avatar});
+        document.body.style.overflow = '';
         handleClose()
         
     };
