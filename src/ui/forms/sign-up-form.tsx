@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import { useRouter } from "next/navigation";
 import { hashPassword } from "@/lib/hash";
 import { signIn } from "next-auth/react";
+import event from '@/lib/google-event'
+
 
 export default function SignUpForm(){
 
@@ -42,6 +44,13 @@ export default function SignUpForm(){
 
     const handleSubmit = async (e:any)=>{
         e.preventDefault();
+        
+        event({
+            action: 'signing-up',
+            category: 'user',
+            label: 'New user created',
+            value: 'New user',
+          });
         
         try{
             const email = formData.email;

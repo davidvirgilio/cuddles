@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Icon } from '@/ui/components/logos/logo-versions'
 
 export default function Auth() {
+
   return (
     <main>
       <div className={styles.home}>

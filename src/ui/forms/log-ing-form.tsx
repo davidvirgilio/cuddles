@@ -2,6 +2,7 @@
 import React, {useState} from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import event from "@/lib/google-event";
 
 export default function LogInForm(){
 
@@ -18,6 +19,14 @@ export default function LogInForm(){
     }
     const handleSubmit = async (e:any)=> {
         e.preventDefault();
+
+        event({
+            action: 'new_login',
+            category: 'authentication',
+            label: 'New Login',
+            value: 'User Login',
+          });
+
         try{
             const res = await signIn("credentials",{
                 email,
