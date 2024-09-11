@@ -45,12 +45,12 @@ export default function Posts({ initialPosts, isProfile = false}: PostsProps ){
       }, [inView, isProfile, offset, posts, userId, stopFetching])
 
     return(
-        <div>
+        <>
             { posts.map((post, index)=>
                 <Post
-                    key={index}
-                    index={index}
-                    post = {post}
+                    key={ index }
+                    index={ index }
+                    post = { post }
                     isProfile={ isProfile }
                 />
             )}
@@ -95,6 +95,6 @@ export default function Posts({ initialPosts, isProfile = false}: PostsProps ){
                 )
             }
             
-        </div>
+        </>
     )
 }

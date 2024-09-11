@@ -12,10 +12,11 @@
 import style from "./profile.module.sass"
 
 // Components:
-import Post from "@/ui/components/show-posts/show-posts";
+import Posts from "@/ui/components/show-posts/show-posts";
 import SignOut from "@/ui/components/sign-out-button";
 import FollowButton from "@/ui/components/follow-button";
 import S3Image from "@/ui/components/image-from-s3-bucket";
+import NoPosts from "@/ui/components/show-posts/no-posts";
 
 // Imports
 import Link from "next/link";
@@ -65,7 +66,7 @@ export default async function Profile({params}:{params: {username: string}}){
         const profilePhoto = userData.profile_pic;
 
         // Fetching user's post array.
-        const { posts} = await getUserPosts(userId);
+        const { posts } = await getUserPosts(userId);
 
         return (
             <>
@@ -119,10 +120,13 @@ export default async function Profile({params}:{params: {username: string}}){
                     </div>
                 </div>
 
-                <Post 
-                    initialPosts={  posts } 
-                    isProfile={ isCurrentUser  }
-                />
+                {
+                    (posts.length === 0) ? <NoPosts/> :
+                    <Posts 
+                        initialPosts={  posts } 
+                        isProfile={ isCurrentUser  }
+                    />
+                }       
             </>
 
         )

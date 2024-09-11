@@ -37,9 +37,8 @@ export default function LogInForm(){
                 setError("Invalid Credentials")
                 return;
             }
-            router.push("/");
+            router.replace("/");
             router.refresh();
-            // console.log("Log in data sent");
             }catch(error){
                 console.error
             }
