@@ -1,7 +1,8 @@
 import Post from "@/models/posts";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }){
+export async function GET(request, props) {
+    const params = await props.params;
     try{
         const postId = params.id;
 
@@ -24,10 +25,10 @@ export async function GET(request, { params }){
         console.error("Stack Trace:", error.stack);
         return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
-
 }
 
-export async function PATCH(req, {params}) {
+export async function PATCH(req, props) {
+    const params = await props.params;
     try {
         const postId = params.id;
         const body = await req.json();
@@ -50,7 +51,6 @@ export async function PATCH(req, {params}) {
     }catch(error){
         return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
-    
 }
 
 

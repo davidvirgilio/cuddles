@@ -1,7 +1,8 @@
 import Post from "@/models/posts";
 import { NextResponse } from "next/server";
 
-export async function GET(request, {params}){
+export async function GET(request, props) {
+    const params = await props.params;
     try{
         const postId = params.postId
         const post = await Post.findById(postId).exec();
@@ -12,7 +13,8 @@ export async function GET(request, {params}){
     }
 }
 
-export async function PATCH(request, {params}) {
+export async function PATCH(request, props) {
+    const params = await props.params;
     try{
         const postId = params.postId;
         const newData = await request.json();

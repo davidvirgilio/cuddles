@@ -1,7 +1,8 @@
 import User from "@/models/users";
 import { NextResponse } from "next/server";
 
-export async function GET(res,{params}){
+export async function GET(res, props) {
+    const params = await props.params;
     try{
         const username = params.user
         const userData = await User.findOne({username: username});
@@ -14,7 +15,8 @@ export async function GET(res,{params}){
 
 
 
-export async function PATCH(req, {params}) {
+export async function PATCH(req, props) {
+    const params = await props.params;
     try {
         const userId = params.user;
         const body = await req.json();
@@ -39,5 +41,4 @@ export async function PATCH(req, {params}) {
         console.log(error)
         return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
-    
 }

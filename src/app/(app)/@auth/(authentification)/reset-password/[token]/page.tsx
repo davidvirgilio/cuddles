@@ -1,5 +1,6 @@
 import ResetPassword from "@/ui/pages/authentication/reset-password/reset-password"
 
-export default function Page({params}:{params: {token: string}}){
+export default async function Page(props:{params: Promise<{token: string}>}) {
+    const params = await props.params;
     return <ResetPassword token={params.token}/>
 }

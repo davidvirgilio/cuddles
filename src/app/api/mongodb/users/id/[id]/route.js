@@ -1,7 +1,8 @@
 import User from "@/models/users";
 import { NextResponse } from "next/server";
 
-export async function GET(res,{params}){
+export async function GET(res, props) {
+    const params = await props.params;
     try{
         const userId = params.id
         const user = await User.findById({ _id: userId }).exec();

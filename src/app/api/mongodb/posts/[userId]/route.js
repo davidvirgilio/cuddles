@@ -2,7 +2,8 @@ import Post from "@/models/posts";
 import { NextResponse } from "next/server";
 import User from "@/models/users";
 
-export async function GET(request ,{params}){
+export async function GET(request, props) {
+    const params = await props.params;
     try{
         const { searchParams } = new URL(request.url);
         const offset = searchParams.get("offset");

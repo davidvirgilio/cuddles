@@ -1,7 +1,8 @@
 import User from "@/models/users";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req, {params}) {
+export async function PATCH(req, props) {
+    const params = await props.params;
     try {
         const followerId = params.userId;
         const body = await req.json();
@@ -35,5 +36,4 @@ export async function PATCH(req, {params}) {
         console.log(error)
         return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
-    
 }

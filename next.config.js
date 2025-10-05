@@ -14,5 +14,8 @@ module.exports =  {
     sassOptions: {
         includePaths: [path.join(__dirname, 'src')],
     },
+    turbopack:{
+        root: path.resolve(__dirname),
+    },
 
 }
